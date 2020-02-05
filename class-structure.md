@@ -9,11 +9,19 @@
 	* calculateAvgTotalStepGoal()
 
 3. Hydration
+	Properties:
+	* allUsers
+
+	Methods:
 	* getAvgConsumedAllTime(userID)
-	* getTotalConsumedByDay(userID, date)
-	* getWeeklyConsumtion(userID, dateRange)
+	* getTotalConsumedByDate(userID, date)
+	* getWeeklyConsumption(userID, dateRange)
 
 4. Sleep
+	Properties:
+	* allUsers
+
+	Methods:
 	* getAvgDailySleep(userID)
 	* getAvgTotalSleepQuality(userID)
 	* getSleepAmountByDate(userID, date)
