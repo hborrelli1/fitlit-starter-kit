@@ -45,7 +45,10 @@ main {
 .widget-container .hydration-widget,
 .widget-container .sleep-widget {
   width:calc(50% - 2em);
+}
 
+.widget-container .widget span {
+  font-weight:bold;
 }
 
 .widget-container .activity-widget {
