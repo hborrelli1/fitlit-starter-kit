@@ -3,9 +3,60 @@
   <head>
     <meta charset="UTF-8">
     <title>Activity Tracker</title>
+    <link rel="stylesheet" href="../css/styles.css">
   </head>
   <body>
-    <h1>Activity Tracker</h1>
+    <header>
+      <h1>Activity Tracker</h1>
+    </header>
+
+    <main>
+      <section class="user-profile">
+        <h2 class="user-name">Harry Borrelli</h2>
+        <div class="address info">
+          <p>15195 Nakia Tunnel, Erdmanport VA 19901-1697</p>
+        </div>
+        <div class="email info">
+          <p>Diana.Hayes1@hotmail.com</p>
+        </div>
+        <div class="stride-length info">
+          <p>4.3</p>
+        </div>
+        <div class="daily-step-goal">
+          <p>10000</p>
+        </div>
+        <div class="friends info">
+          <ul>
+            <li>Friend 1</li>
+            <li>Friend 2</li>
+            <li>Friend 3</li>
+          </ul>
+        </div>
+      </section>
+      <section class="widget-container">
+        <section class="widget hydration-widget">
+          <h3>Hydration</h3>
+          <p class="avg-consumed-all-time">Total average of water consumed per day: <span>empty</span> oz</p>
+          <p class="total-consumed-today">Total consumed today: <span>empty</span> cups</p>
+          <p class="weekly-consumption">Consumed this week: <span>empty</span>  cups</p>
+        </section>
+        <section class="widget sleep-widget">
+          <h3>Sleep</h3>
+          <p class="average-hours-sleep-per-day">Average hours of sleep per day: <span>empty</span></p>
+          <p class="average-sleep-quality">Average sleep quality per day: <span>empty</span></p>
+          <p class="amount-slept-today">Hours of sleep today: <span>empty</span></p>
+          <p>Sleep quality today: <span>empty</span></p>
+          <p class="amount-slept-this-week">Hours of sleep this week: <span>empty</span></p>
+          <p class="sleep-quality-this-week">Sleep quality this week: <span>empty</span></p>
+          <p class="total-avg-sleep-quality-all">Average sleep quality for all users: <span>empty</span></p>
+        </section>
+        <section class="widget activity-widget">
+          <h3>Activity</h3>
+
+
+        </section>
+      </section>
+    </main>
 
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/hydration.js"></script>
