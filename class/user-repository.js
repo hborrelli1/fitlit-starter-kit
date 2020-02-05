@@ -1,8 +1,8 @@
-const userList = require('../data/users');
+// const userList = require('../data/users');
 
 class UserRepository {
-  constructor(userList) {
-    this.data = userList;
+  constructor(userData) {
+    this.data = userData;
   }
   getUserInfo(userID) {
     return this.data.find(function(userInfo) {
