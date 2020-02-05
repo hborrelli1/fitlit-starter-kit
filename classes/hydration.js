@@ -32,9 +32,7 @@ class Hydration {
       acc.push({date: event.date, numOfOunces: event.numOunces});
 
       return acc;
-    }, [])
-
-    return usersEvents;
+    }, []);
   }
 
 }
