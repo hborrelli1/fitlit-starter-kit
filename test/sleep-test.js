@@ -39,7 +39,16 @@ describe('Sleep Tests', () => {
     it('should be able to return sleep quality for a specified day', () => {
       expect(sleep.getSleepQualityByDate(1, '2019/06/15')).to.equal(2.2);
       expect(sleep.getSleepQualityByDate(4, '2019/06/15')).to.equal(2.5);
-    })
+    });
+
+    it('should be able to calculate how many hours slept each day over the course of a given week (7 days)', () => {
+      expect(sleep.getSleepAmountByWeek(4, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/16', hoursSlept: 10.4}, {date: '2019/06/15', hoursSlept: 9.4}, {date: '2019/06/14', hoursSlept: 8.8}]);
+    });
+
+    it('should be able to calculate their sleep quality each day over the course of a given week (7 days)', () => {
+      expect(sleep.getSleepQualityByWeek(5, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/15', sleepQuality: 3.6}]);
+      expect(sleep.getSleepQualityByWeek(4, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/16', sleepQuality: 3}, {date: '2019/06/15', sleepQuality: 2.5}, {date: '2019/06/14', sleepQuality: 3}]);
+    });
   });
 
 });

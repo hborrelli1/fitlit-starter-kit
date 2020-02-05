@@ -31,7 +31,44 @@ class Sleep {
     return Number(avg.toFixed(1));
   }
 
-  // getSleepAmountByDate(userID, date)
+  getSleepAmountByDate(userID, date) {
+    let entry = this.data.find(user => {
+      return user.userID === userID && user.date === date;
+    });
+    return entry.hoursSlept;
+  }
+
+  getSleepQualityByDate(userID, date) {
+    let entry = this.data.find(user => {
+      return user.userID === userID && user.date === date;
+    });
+
+    return entry.sleepQuality;
+  }
+
+  getSleepAmountByWeek(userID, dateRange) {
+    let entries = this.data.filter(user => {
+      return (user.userID === userID && (user.date >= dateRange[0] && user.date <= dateRange[1]));
+    });
+
+    return entries.reduce((acc, date) => {
+      acc.push({ date: date.date, hoursSlept: date.hoursSlept });
+
+      return acc;
+    }, []);
+  }
+
+  getSleepQualityByWeek(userID, dateRange) {
+    let entries = this.data.filter(user => {
+      return (user.userID === userID && (user.date >= dateRange[0] && user.date <= dateRange[1]));
+    });
+
+    return entries.reduce((acc, date) => {
+      acc.push({ date:date.date, sleepQuality: date.sleepQuality });
+
+      return acc;
+    }, []);
+  }
 }
 
 if (typeof module !== 'undefined') {
@@ -41,9 +78,6 @@ if (typeof module !== 'undefined') {
 
 // Methods:
 
-// getSleepQualityByDate(userID, date)
-// getSleepAmountByWeek(userID, dateRange)
-// getSleepQualityByWeek(userID, dateRange)
 // getAllUsersAvgSleepQuality()
 // findAllHighQualitySleepers(dateRange)
 // getUserWhoSleptMost(date)
