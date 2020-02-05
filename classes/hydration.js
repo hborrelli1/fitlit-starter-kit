@@ -6,10 +6,13 @@ class Hydration {
   getAvgConsumedAllTime(userID) {
     let usersEvents = this.hydrationEvents.filter(user => user.userID === userID);
 
-    return usersEvents.reduce((acc, user) => {
+    let total = usersEvents.reduce((acc, user) => {
       acc += user.numOunces;
+
       return acc;
     }, 0);
+
+    return total / usersEvents.length;
   }
 
   getTotalConsumedByDate(userID, date) {
