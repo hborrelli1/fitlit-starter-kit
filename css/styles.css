@@ -1,0 +1,53 @@
+*,
+*:before,
+*:after {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;;
+}
+
+h2,
+h3 {
+  margin-bottom:20px;
+}
+
+header {
+  background-color:#3d3d40;
+  color:#fff;
+  text-align: center;
+  padding:20px;
+}
+
+main {
+  display: flex;
+  height:calc(100vh - 77px);
+}
+
+.user-profile {
+  width:25%;
+  padding:2em;
+  background-color:#c7c7c7;
+}
+
+.widget-container {
+  width:75%;
+  display:flex;
+  flex-flow:wrap;
+}
+
+.widget-container .widget {
+  margin:1em;
+  padding:2em;
+  border-radius:4px;
+  box-shadow: 0px 1px 12px 1px #afafaf;
+}
+
+.widget-container .hydration-widget,
+.widget-container .sleep-widget {
+  width:calc(50% - 2em);
+
+}
+
+.widget-container .activity-widget {
+  width:100%;
+}
