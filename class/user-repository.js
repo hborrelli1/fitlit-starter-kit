@@ -1,6 +1,8 @@
+// const userList = require('../data/users');
+
 class UserRepository {
-  constructor(data) {
-    this.data = data
+  constructor(userData) {
+    this.data = userData;
   }
   getUserInfo(userID) {
     return this.data.find(function(userInfo) {
