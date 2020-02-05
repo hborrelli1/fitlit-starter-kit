@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = require('chai').expect;
 const Hydration = require('../classes/hydration');
-const hydrationData = require('./data/hydration-sample-data');
+const hydrationData = require('./datasets/hydration-sample-data');
 
 describe('Hydration', () => {
   let hydration;
