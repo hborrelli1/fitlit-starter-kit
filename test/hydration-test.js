@@ -22,7 +22,7 @@ describe('Hydration', () => {
 
   describe('testing methods', () => {
     it('should be able to get users average consumed water of all time.', () => {
-      expect(hydration.getAvgConsumedAllTime(1)).to.equal(80);
+      expect(hydration.getAvgConsumedAllTime(1)).to.equal(40);
     });
 
     it('should be able to get users total amount of water consumed by date', () => {
