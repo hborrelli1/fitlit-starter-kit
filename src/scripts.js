@@ -13,7 +13,7 @@ const allStepGoals = userRepo.calculateAvgTotalStepGoal();
 
 let randNum = Math.floor(Math.random() * 50) + 1;
 
-let currentUser = userRepo.getUserInfo(randNum);
+let currentUser = new User(userRepo.getUserInfo(randNum));
 console.log(randNum);
 console.log(currentUser);
 
