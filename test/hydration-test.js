@@ -1,4 +1,4 @@
-const chai = require("chai");
+// const chai = require("chai");
 const expect = require('chai').expect;
 const Hydration = require('../class/hydration');
 const hydrationData = require('./datasets/hydration-sample-data');
@@ -16,7 +16,7 @@ describe('Hydration', () => {
     });
 
     it('should be able to take in hydration events', () => {
-      expect(hydration.hydrationEvents.length).to.equal(6);
+      expect(hydration.data.length).to.equal(6);
     });
   });
 

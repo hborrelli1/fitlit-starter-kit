@@ -54,3 +54,16 @@ main {
 .widget-container .activity-widget {
   width:100%;
 }
+
+.widget-container .weekly-consumption-list {
+  display:flex;
+}
+
+.widget-container .weekly-consumption-list div {
+  text-align:center;
+  width:100%;
+}
+
+.widget-container .weekly-consumption-list div * {
+  display:block;
+}
