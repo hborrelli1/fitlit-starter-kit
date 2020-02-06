@@ -55,15 +55,15 @@ main {
   width:100%;
 }
 
-.widget-container .weekly-consumption {
+.widget-container .weekly-consumption-list {
   display:flex;
 }
 
-.widget-container .weekly-consumption div {
+.widget-container .weekly-consumption-list div {
   text-align:center;
   width:100%;
 }
 
-.widget-container .weekly-consumption div * {
+.widget-container .weekly-consumption-list div * {
   display:block;
 }

@@ -16,7 +16,7 @@ describe('Hydration', () => {
     });
 
     it('should be able to take in hydration events', () => {
-      expect(hydration.hydrationEvents.length).to.equal(6);
+      expect(hydration.data.length).to.equal(6);
     });
   });
 
