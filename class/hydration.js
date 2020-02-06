@@ -26,7 +26,7 @@ class Hydration {
   }
 
   getWeeklyConsumption(userID, dateRange) {
-    let usersEvents = this.data.filter(user => (user.userID === userID && (user.date >= dateRange[0] && user.date <= dateRange[1])));
+    let usersEvents = this.data.filter(user => (user.userID === userID && (user.date <= dateRange[0] && user.date >= dateRange[1])));
 
     return usersEvents.reduce((acc, event) => {
       acc.push({date: event.date, numOfOunces: event.numOunces});
