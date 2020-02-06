@@ -13,7 +13,7 @@ let currentUser = userRepo.getUserInfo(randNum);
 console.log(randNum);
 console.log(currentUser);
 
-getFriends(currentUser.friends);
+let names = getFriends(currentUser.friends);
 // console.log(currentUserFriends);
 
 function getFriends(idArray) {
@@ -26,7 +26,8 @@ function getFriends(idArray) {
       return userInfo.id === id;
     }).name;
   })
-  console.log(friendsNames);
+  console.log(friendsNames.join(', '));
+  return friendsNames.join(', ');
 }
 
 // creat array of currentUsers friends (objects)
@@ -39,6 +40,7 @@ address.innerText = currentUser.address;
 email.innerText = currentUser.email;
 strideLength.innerText = currentUser.strideLength;
 dailyStepGoal.innerText = currentUser.dailyStepGoal;
+friends.innerText = names;
 
 // let usersFriends = '';
 
