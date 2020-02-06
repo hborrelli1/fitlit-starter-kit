@@ -12,15 +12,10 @@ let randNum = Math.floor(Math.random() * 50) + 1;
 let currentUser = userRepo.getUserInfo(randNum);
 let hydrationDataset = new Hydration(hydrationData);
 
-let todaysDate = '2019/09/15';
-let lastDate = '2019/09/21';
-/*
-page loads
-userID generated
-userRepo created
-hydration for user is fetched
+let todaysDate = '2019/09/21';
+let lastDate = '2019/09/16';
 
-*/
+
 let userWaterConsumption = hydrationDataset.getTotalConsumedByDate(randNum, todaysDate);
 console.log(userWaterConsumption);
 
@@ -28,25 +23,21 @@ let weeklyConsumption = hydrationDataset.getWeeklyConsumption(randNum, [todaysDa
 console.log(weeklyConsumption);
 
 function populateWeeklyWaterConsumption() {
-  let days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  // let days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   let fullWeek = '';
 
   let totalForWeek = weeklyConsumption.reduce((acc, day) => {
+    let date = day.date.substring(5);
     fullWeek += `<div>
-      <span class="day-of-week">${days[acc]}</span>
+      <span class="day-of-week">${date}</span>
       <span id="waterConsumption-0">${day.numOfOunces}</span>
     </div>`;
-    acc++;
+    acc--;
     return acc;
-  }, 0);
+  }, 6);
 
   console.log(totalForWeek);
   weeklyConsumptionList.insertAdjacentHTML('beforeend', fullWeek);
-
-  // for (var i = 0; i < weeklyConsumption.length; i++){
-  //   let dayOfWeek = `#waterConsumption-${i}`;
-  //   document.querySelector(dayOfWeek).innerHTML = weeklyConsumption[i].numOfOunces;
-  // }
 
 }
 populateWeeklyWaterConsumption();
