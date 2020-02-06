@@ -13,6 +13,22 @@ let currentUser = userRepo.getUserInfo(randNum);
 console.log(randNum);
 console.log(currentUser);
 
+getFriends(currentUser.friends);
+// console.log(currentUserFriends);
+
+function getFriends(idArray) {
+  let friendsNames = idArray.map(function(id) {
+    // const matchingUserData = userData.find(function(userInfo) {
+    //   return userInfo.id === id
+    // })
+    // return matchingUserData.name
+    return userData.find(function(userInfo) {
+      return userInfo.id === id;
+    }).name;
+  })
+  console.log(friendsNames);
+}
+
 // creat array of currentUsers friends (objects)
 // Loop through each object to push name (li with name) to usersFriends below.
 // usersFriends then gets pushed to the friends element.
