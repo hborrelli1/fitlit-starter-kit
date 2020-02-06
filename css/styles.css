@@ -28,6 +28,9 @@ main {
   padding:2em;
   background-color:#c7c7c7;
 }
+.user-profile div {
+  margin: 3%;
+}
 
 .widget-container {
   width:75%;
