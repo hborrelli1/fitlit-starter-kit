@@ -4,8 +4,12 @@ const email = document.getElementById('email');
 const strideLenth = document.getElementById('strideLenth');
 const dailyStepGoal = document.getElementById('dailyStepGoal');
 const friends = document.getElementById('friends');
+const firstName = document.getElementById('firstName');
+const totalStepGoal = document.getElementById('totalStepGoal');
 
 let userRepo = new UserRepository(userData);
+
+const allStepGoals = userRepo.calculateAvgTotalStepGoal();
 
 let randNum = Math.floor(Math.random() * 50) + 1;
 
@@ -24,13 +28,14 @@ function getFriends(idArray) {
   return friendsNames.join(', ');
 }
 
-
+// firstName.innerText = currentUser.returnUsersFirstName();
 userName.innerText = currentUser.name;
 address.innerText = currentUser.address;
 email.innerText = currentUser.email;
 strideLength.innerText = currentUser.strideLength;
 dailyStepGoal.innerText = currentUser.dailyStepGoal;
 friends.innerText = names;
+totalStepGoal.innerText = allStepGoals;
 
 // let usersFriends = '';
 
