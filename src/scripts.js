@@ -28,7 +28,7 @@ function getFriends(idArray) {
   return friendsNames.join(', ');
 }
 
-// firstName.innerText = currentUser.returnUsersFirstName();
+firstName.innerHTML = `Welcome back, ${currentUser.returnUsersFirstName()}!`;
 userName.innerText = currentUser.name;
 address.innerText = currentUser.address;
 email.innerText = currentUser.email;
