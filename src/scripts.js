@@ -12,7 +12,7 @@ let randNum = Math.floor(Math.random() * 50) + 1;
 let currentUser = userRepo.getUserInfo(randNum);
 let hydrationDataset = new Hydration(hydrationData);
 
-let todaysDate = '2019/09/21';
+let todaysDate = '2019/09/22';
 let lastDate = '2019/09/16';
 
 
