@@ -15,18 +15,9 @@ let randNum = Math.floor(Math.random() * 50) + 1;
 
 let currentUser = new User(userRepo.getUserInfo(randNum));
 console.log(randNum);
-console.log(currentUser);
-
-let names = getFriends(currentUser.friends);
-
-function getFriends(idArray) {
-  let friendsNames = idArray.map(function(id) {
-    return userData.find(function(userInfo) {
-      return userInfo.id === id;
-    }).name;
-  })
-  return friendsNames.join(', ');
-}
+console.log(userRepo.getUserInfo);
+debugger
+let names = userRepo.getFriends(currentUser.friends);
 
 firstName.innerHTML = `Welcome back, ${currentUser.returnUsersFirstName()}!`;
 userName.innerText = currentUser.name;
