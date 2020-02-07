@@ -65,6 +65,6 @@ describe('UserRepository', function() {
     const userRepository = new UserRepository(data);
 
 
-    expect(userRepository.getFriends([2])).to.equal('Jarvis Considine');
+    expect(userRepository.getFriends([2])).to.deep.equal(['Jarvis Considine']);
   })
 })
