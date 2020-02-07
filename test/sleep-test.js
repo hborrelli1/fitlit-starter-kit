@@ -49,6 +49,24 @@ describe('Sleep Tests', () => {
       expect(sleep.getSleepQualityByWeek(5, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/15', sleepQuality: 3.6}]);
       expect(sleep.getSleepQualityByWeek(4, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/16', sleepQuality: 3}, {date: '2019/06/15', sleepQuality: 2.5}, {date: '2019/06/14', sleepQuality: 3}]);
     });
+
+    it('should be able to get the average sleep quality for all users', () => {
+      expect(sleep.getAllUsersAvgSleepQuality()).to.equal(3.5);
+    });
+
+    it.skip('should be able to find the top best sleepers', () => {
+      // expect(sleep.findAllHighQualitySleepers()).to.equal()
+    });
+
+    it('should be able to find the user who slept the most number of hours (one or more if they tied)', () => {
+      expect(sleep.getUserWhoSleptMost('2019/06/15')).to.deep.equal({
+        "userID": 3,
+        "date": "2019/06/15",
+        "hoursSlept": 10.8,
+        "sleepQuality": 4.7
+      });
+    });
+
   });
 
 });
