@@ -15,7 +15,9 @@ describe('UserRepository', function() {
       "strideLength": 4.3,
       "dailyStepGoal": 10000,
       "friends": [
-        2
+        16,
+        4,
+        8
       ]
     }
     user2Info = {
@@ -44,6 +46,7 @@ describe('UserRepository', function() {
       user2Info
     ]
     const userRepository = new UserRepository(data)
+
     expect(userRepository.getUserInfo(2)).to.equal(user2Info)
   })
 
@@ -55,16 +58,5 @@ describe('UserRepository', function() {
     const userRepository = new UserRepository(data)
 
     expect(userRepository.calculateAvgTotalStepGoal()).to.equal(7500)
-  })
-
-  it('should be able to give a list of current user\'s friends', function() {
-    const data = [
-      user1Info,
-      user2Info
-    ]
-    const userRepository = new UserRepository(data);
-
-
-    expect(userRepository.getFriends([2])).to.equal('Jarvis Considine');
   })
 })
