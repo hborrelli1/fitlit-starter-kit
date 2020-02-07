@@ -1,4 +1,4 @@
-const chai = require("chai");
+// const chai = require("chai");
 const expect = require('chai').expect;
 const Hydration = require('../class/hydration');
 const hydrationData = require('./datasets/hydration-sample-data');
@@ -16,7 +16,7 @@ describe('Hydration', () => {
     });
 
     it('should be able to take in hydration events', () => {
-      expect(hydration.hydrationEvents.length).to.equal(6);
+      expect(hydration.data.length).to.equal(6);
     });
   });
 
@@ -30,7 +30,7 @@ describe('Hydration', () => {
     });
 
     it('should be able to get users weekly water consumption', () => {
-      expect(hydration.getWeeklyConsumption(1, ['2019/07/18', '2019/07/25'])).to.deep.equal([{date: '2019/07/18', numOfOunces: 37}, {date: '2019/07/25', numOfOunces: 43}]);
+      expect(hydration.getWeeklyConsumption(1, ['2019/07/25', '2019/07/18'])).to.deep.equal([{date: '2019/07/18', numOfOunces: 37}, {date: '2019/07/25', numOfOunces: 43}]);
     })
   });
 

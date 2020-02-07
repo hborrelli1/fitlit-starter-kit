@@ -1,4 +1,4 @@
-const chai = require("chai");
+// const chai = require("chai");
 const expect = require('chai').expect;
 const Sleep = require('../class/sleep');
 const sleepData = require('./datasets/sleep-sample-data');
