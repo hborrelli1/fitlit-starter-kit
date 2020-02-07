@@ -4,17 +4,28 @@ const email = document.getElementById('email');
 const strideLenth = document.getElementById('strideLenth');
 const dailyStepGoal = document.getElementById('dailyStepGoal');
 const friends = document.getElementById('friends');
+const firstName = document.getElementById('firstName');
+const totalStepGoal = document.getElementById('totalStepGoal');
 const waterComsumptionToday = document.getElementById('waterComsumptionToday');
 const weeklyConsumptionList = document.getElementById('weeklyConsumptionList');
 
 let userRepo = new UserRepository(userData);
+const allStepGoals = userRepo.calculateAvgTotalStepGoal();
 let randNum = Math.floor(Math.random() * 50) + 1;
-let currentUser = userRepo.getUserInfo(randNum);
+let currentUser = new User(userRepo.getUserInfo(randNum));
+let names = userRepo.getFriends(currentUser.friends);
+
+function addFriendNames(){
+  let friends = names.map(function(name){
+    return `<li>${name}</li>`
+  })
+  return friends.join(' ');
+}
+
 let hydrationDataset = new Hydration(hydrationData);
 
 let todaysDate = '2019/09/21';
 let lastDate = '2019/09/16';
-
 
 let userWaterConsumption = hydrationDataset.getTotalConsumedByDate(randNum, todaysDate);
 console.log(userWaterConsumption);
@@ -44,33 +55,11 @@ populateWeeklyWaterConsumption();
 
 waterComsumptionToday.innerHTML = userWaterConsumption;
 
-// function getHydrationInfo(userID) {
-//
-// }
-// creat array of currentUsers friends (objects)
-// Loop through each object to push name (li with name) to usersFriends below.
-// usersFriends then gets pushed to the friends element.
-
-// Populate user information in dom
+firstName.innerHTML = `Welcome back, ${currentUser.returnUsersFirstName()}!`;
 userName.innerText = currentUser.name;
 address.innerText = currentUser.address;
 email.innerText = currentUser.email;
 strideLength.innerText = currentUser.strideLength;
 dailyStepGoal.innerText = currentUser.dailyStepGoal;
-
-// Populate Hydration information
-// waterComsumptionToday.innerText =
-
-
-
-// let usersFriends = '';
-
-// currentUser.friends.forEach(friend => usersFriends += friend.friends);
-// console.log(usersFriends);
-
-// friends.insertAdjacentHTML('beforeend', usersFriends);
-
-
-// Grab user from userRepository by id (randNum)
-
-// Instantiate as currentUser
+friends.innerHTML = addFriendNames(names);
+totalStepGoal.innerText = allStepGoals;

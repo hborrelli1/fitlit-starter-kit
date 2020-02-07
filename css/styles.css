@@ -29,6 +29,14 @@ main {
   background-color:#c7c7c7;
 }
 
+.user-profile div {
+  margin: 3%;
+}
+
+.goals {
+  margin-top: 10%;
+}
+
 .widget-container {
   width:75%;
   display:flex;
