@@ -21,7 +21,7 @@ class UserRepository {
         return userInfo.id === id;
       }).name;
     }.bind(this))
-    return friendsNames.join(', ');
+    return friendsNames;
   };
 }
 
