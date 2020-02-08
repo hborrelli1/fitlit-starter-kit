@@ -59,7 +59,7 @@ describe('Sleep Tests', () => {
     });
 
     it('should be able to find the user who slept the most number of hours (one or more if they tied)', () => {
-      expect(sleep.getUserWhoSleptMost('2019/06/15')[0]).to.deep.equal({
+      expect(sleep.getUserWhoSleptMost('2019/06/15')).to.deep.equal({
         "userID": 3,
         "date": "2019/06/15",
         "hoursSlept": 10.8,
