@@ -114,3 +114,15 @@ const populateWeeklySleepInfo = (randNum, dateRange) => {
 }
 
 populateWeeklySleepInfo(randNum, [todaysDate, lastDate]);
+
+const populateAllTimeAvgSleepQuality = () => {
+  allTimeSleepQuality.innerHTML = sleepDataset.getAvgTotalSleepQuality(randNum);
+}
+
+populateAllTimeAvgSleepQuality();
+
+const populateAllTimeAvgSleepHours = () => {
+  allTimeSleepHours.innerHTML = sleepDataset.getAvgDailySleep(randNum);
+}
+
+populateAllTimeAvgSleepHours();

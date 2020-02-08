@@ -48,11 +48,11 @@ class Sleep {
 
   getSleepAmountByWeek(userID, dateRange) {
     let entries = this.data.filter(user => {
-      return (user.userID === userID && (user.date <= dateRange[0] && user.date >= dateRange[1]));
+      return (user.userID === userID && (user.date >= dateRange[0] && user.date <= dateRange[1]));
     });
 
     return entries.reduce((acc, date) => {
-      acc.push({ date: date.date, hoursSlept: date.hoursSlept, sleepQuality: date.sleepQuality });
+      acc.push({ date: date.date, hoursSlept: date.hoursSlept });
 
       return acc;
     }, []);
