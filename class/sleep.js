@@ -93,9 +93,13 @@ class Sleep {
     })[0];
   }
 
-  // findWorstSleeper(date) {
-  //
-  // }
+  findWorstSleeper(date) {
+    let sleepForDate = this.data.filter(user => user.date === date);
+
+    return sleepForDate.sort((a, b) => {
+      return b.hoursSlept - a.hoursSlept;
+    })[sleepForDate.length - 1];
+  }
 
 }
 
