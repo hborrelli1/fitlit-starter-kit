@@ -33,6 +33,41 @@ const activityData = [
     "numSteps": 11374,
     "minutesActive": 213,
     "flightsOfStairs": 13
+  },
+  {
+    "userID": 1,
+    "date": "2019/06/16",
+    "numSteps": 6637,
+    "minutesActive": 175,
+    "flightsOfStairs": 36
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/16",
+    "numSteps": 4112,
+    "minutesActive": 220,
+    "flightsOfStairs": 37
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/16",
+    "numSteps": 12304,
+    "minutesActive": 152,
+    "flightsOfStairs": 8
+  },
+  {
+    "userID": 4,
+    "date": "2019/06/16",
+    "numSteps": 10689,
+    "minutesActive": 204,
+    "flightsOfStairs": 10
+  },
+  {
+    "userID": 5,
+    "date": "2019/06/16",
+    "numSteps": 9350,
+    "minutesActive": 167,
+    "flightsOfStairs": 38
   }
 ];
 
