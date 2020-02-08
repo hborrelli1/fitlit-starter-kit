@@ -47,7 +47,7 @@ describe('Activity', function() {
   });
 
   it('should return all dates a user has exceeded their step goal', function() {
-
+    expect(activity.getAllExceededStepGoalDates(3)).to.deep.equal(['2019/06/15', '2019/06/16']);
   });
 
   it('should be able to return a user\'s stair climbing record', function() {

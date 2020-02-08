@@ -34,9 +34,6 @@ class Activity {
     return stepAmount >= dailyStepGoal;
   }
   getAllExceededStepGoalDates(userID) {
-    // given a userID, pull the user's step goal from the user repository.
-    // pull all activity records for that user ID and put them in an array
-    // search all user records and return all dates they exceeded their goal
     const userRepo = new UserRepository(userData);
     const dailyStepGoal = userRepo.getUserInfo(userID).dailyStepGoal;
 
@@ -44,8 +41,10 @@ class Activity {
       return activity.userID === userID;
     });
     let activitiesArray = userActivities.map(function(activity) {
-      return activity.numSteps >= dailyStepGoal
-    }).date;
+      if(activity.numSteps >= dailyStepGoal){
+        return activity.date;
+      }
+    });
     return activitiesArray;
   }
   getStairClimbingRecord(userID) {
