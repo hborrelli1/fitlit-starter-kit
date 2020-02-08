@@ -96,7 +96,7 @@ populateQualityOfSleep();
 
 // Populate weekly sleep info
 const populateWeeklySleepInfo = (randNum, dateRange) => {
-  let weeklySleep = sleepDataset.getSleepAmountByWeek(randNum, [todaysDate, lastDate]);
+  let weeklySleep = sleepDataset.getSleepInfoByWeek(randNum, [lastDate, todaysDate]);
   let fullWeek = '';
 
   let totalForWeek = weeklySleep.reduce((acc, day) => {

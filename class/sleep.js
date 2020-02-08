@@ -46,29 +46,29 @@ class Sleep {
     return entry.sleepQuality;
   }
 
-  getSleepAmountByWeek(userID, dateRange) {
+  getSleepInfoByWeek(userID, dateRange) {
     let entries = this.data.filter(user => {
       return (user.userID === userID && (user.date >= dateRange[0] && user.date <= dateRange[1]));
     });
 
     return entries.reduce((acc, date) => {
-      acc.push({ date: date.date, hoursSlept: date.hoursSlept });
+      acc.push({ date: date.date, hoursSlept: date.hoursSlept, sleepQuality: date.sleepQuality });
 
       return acc;
     }, []);
   }
 
-  getSleepQualityByWeek(userID, dateRange) {
-    let entries = this.data.filter(user => {
-      return (user.userID === userID && (user.date >= dateRange[0] && user.date <= dateRange[1]));
-    });
-
-    return entries.reduce((acc, date) => {
-      acc.push({ date:date.date, sleepQuality: date.sleepQuality });
-
-      return acc;
-    }, []);
-  }
+  // getSleepQualityByWeek(userID, dateRange) {
+  //   let entries = this.data.filter(user => {
+  //     return (user.userID === userID && (user.date >= dateRange[0] && user.date <= dateRange[1]));
+  //   });
+  //
+  //   return entries.reduce((acc, date) => {
+  //     acc.push({ date:date.date, sleepQuality: date.sleepQuality });
+  //
+  //     return acc;
+  //   }, []);
+  // }
 
   getAllUsersAvgSleepQuality() {
     let total = this.data.reduce((total, entry) => {
@@ -92,6 +92,10 @@ class Sleep {
       return b.hoursSlept - a.hoursSlept;
     })[0];
   }
+
+  // findWorstSleeper(date) {
+  //
+  // }
 
 }
 
