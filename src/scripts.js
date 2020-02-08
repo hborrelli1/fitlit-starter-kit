@@ -11,13 +11,17 @@ const weeklyConsumptionList = document.getElementById('weeklyConsumptionList');
 const hoursOfSleep = document.getElementById('hoursOfSleep');
 const qualityOfSleep = document.getElementById('qualityOfSleep');
 const weeklySleepList = document.getElementById('weeklySleepList');
+const allTimeSleepQuality = document.getElementById('allTimeSleepQuality');
+const allTimeSleepHours = document.getElementById('allTimeSleepHours');
 
-let userRepo = new UserRepository(userData);
+// Initialize Data
+const userRepo = new UserRepository(userData);
 const allStepGoals = userRepo.calculateAvgTotalStepGoal();
 let randNum = Math.floor(Math.random() * 50) + 1;
 let currentUser = new User(userRepo.getUserInfo(randNum));
 let names = userRepo.getFriends(currentUser.friends);
 
+// Add Friends
 function addFriendNames(){
   let friends = names.map(function(name){
     return `<li>${name}</li>`
@@ -25,21 +29,21 @@ function addFriendNames(){
   return friends.join(' ');
 }
 
+// Get hydration info
 let hydrationDataset = new Hydration(hydrationData);
 let sleepDataset = new Sleep(sleepData);
 
+// Set todays date and previous week date.\
 let todaysDate = '2019/09/22';
 let lastDate = '2019/09/16';
 
+// Get water consumption
 let userWaterConsumption = hydrationDataset.getTotalConsumedByDate(randNum, todaysDate);
-console.log(userWaterConsumption);
 
 
-
-function populateWeeklyWaterConsumption() {
+// Populate Water Consumption
+const populateWeeklyWaterConsumption = () => {
   let weeklyConsumption = hydrationDataset.getWeeklyConsumption(randNum, [todaysDate, lastDate]);
-  console.log(weeklyConsumption);
-
   let fullWeek = '';
 
   let totalForWeek = weeklyConsumption.reduce((acc, day) => {
@@ -52,13 +56,19 @@ function populateWeeklyWaterConsumption() {
     return acc;
   }, 0);
 
-  // console.log(totalForWeek);
   weeklyConsumptionList.insertAdjacentHTML('beforeend', fullWeek);
-
 }
+
 populateWeeklyWaterConsumption();
 
-waterComsumptionToday.innerHTML = userWaterConsumption;
+
+// Populate DOM with User information
+const populateWaterConsumption = () => {
+  waterComsumptionToday.innerHTML = userWaterConsumption;
+}
+
+populateWaterConsumption();
+
 
 firstName.innerHTML = `Welcome back, ${currentUser.returnUsersFirstName()}!`;
 userName.innerText = currentUser.name;
@@ -69,13 +79,14 @@ dailyStepGoal.innerText = currentUser.dailyStepGoal;
 friends.innerHTML = addFriendNames(names);
 totalStepGoal.innerText = allStepGoals;
 
+// Populate Hours of sleep
 const populateHoursOfSleep = () => {
   hoursOfSleep.innerHTML = sleepDataset.getSleepAmountByDate(randNum, todaysDate);
 }
 
 populateHoursOfSleep();
 
-
+// Populate Quantity of sleep
 const populateQualityOfSleep = () => {
   qualityOfSleep.innerHTML = sleepDataset.getSleepQualityByDate(randNum, todaysDate);
 }
@@ -83,11 +94,9 @@ const populateQualityOfSleep = () => {
 populateQualityOfSleep();
 
 
-
-function populateWeeklySleepInfo(randNum, dateRange) {
+// Populate weekly sleep info
+const populateWeeklySleepInfo = (randNum, dateRange) => {
   let weeklySleep = sleepDataset.getSleepAmountByWeek(randNum, [todaysDate, lastDate]);
-  console.log(weeklySleep);
-
   let fullWeek = '';
 
   let totalForWeek = weeklySleep.reduce((acc, day) => {
@@ -101,7 +110,6 @@ function populateWeeklySleepInfo(randNum, dateRange) {
     return acc--;
   }, 6);
 
-  console.log(fullWeek);
   weeklySleepList.insertAdjacentHTML('beforeend', fullWeek);
 }
 
