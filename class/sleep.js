@@ -80,9 +80,63 @@ class Sleep {
     return Number(avg.toFixed(1));
   }
 
-  // findAllHighQualitySleepers(dateRange)
+  findAllHighQualitySleepers(dateRange) {
+    let userIds = [];
+    // let sleepEntriesByWeek = [];
+    let highQualitySleepers = [];
 
-  // get entries for a
+    userRepo.data.forEach(user => userIds.push(user.id));
+
+    let sleepEntriesByWeek = this.data.filter(entry => entry.date >= dateRange[0] && entry.date <= dateRange[1]);
+
+    let usersEntries = [];
+    userIds.forEach(id => {
+      usersEntries.push(sleepEntriesByWeek.filter(entry => entry.userID === id));
+    });
+    console.log(usersEntries);
+
+    usersEntries.forEach((week, index) => {
+      let weeklyTotal = week.reduce((acc, day) => {
+        acc += day.sleepQuality;
+
+        return acc;
+      }, 0);
+
+      let avg = weeklyTotal / week.length;
+      if (avg >= 3) {
+        highQualitySleepers.push(index + 1);
+      }
+    });
+
+    console.log(highQualitySleepers);
+
+    // Filter all entries by dateRange
+    // Filter all entries in dateRange by user.
+      // Reduce to calculate avg for week by user
+      // If users average > 3 add to array.
+
+
+    // console.log('users ids: ' + userIds);
+    // userIds.forEach(id => {
+    //   return sleepEntriesByWeek.push(this.data.filter(user => user.userID === id && (this.data.date >= dateRange[0] && this.data.date <= dateRange[1])));
+    // });
+    //
+    // console.log('sleep entries by week: ' + sleepEntriesByWeek);
+
+    // let filterSleepersByDate = userIds.reduce((acc, sleepEntry) => {
+    //   if (this.data.date >= dateRange[0] && this.data.date <= dateRange[1]) {
+    //     acc.push()
+    //   }
+    //
+    //   return acc;
+    // },[])
+  }
+
+
+
+  // For each user grab entries for given week.
+  // If users sleep quality is > 3 for given week push to array
+  // return array of users whos quality is > 3 for given week.
 
 
   getUserWhoSleptMost(date) {

@@ -1,10 +1,16 @@
 // const chai = require("chai");
 const expect = require('chai').expect;
+const userData = require('../data/users');
 const Sleep = require('../class/sleep');
+const UserRepository = require('../class/user-repository');
+
 const sleepData = require('./datasets/sleep-sample-data');
+// const userData = require('../data/users');
+// const userRepo = new UserRepository(userData);
 
 describe('Sleep Tests', () => {
   let sleep;
+  let userRepo;
 
   beforeEach(() => {
     sleep = new Sleep(sleepData);
@@ -54,8 +60,9 @@ describe('Sleep Tests', () => {
       expect(sleep.getAllUsersAvgSleepQuality()).to.equal(3.5);
     });
 
-    it.skip('should be able to find the top best sleepers', () => {
-      // expect(sleep.findAllHighQualitySleepers()).to.equal()
+    it('should be able return users who average a sleep quality greater than 3 for a given week (7 days) - you should be able to calculate this for any week, not just the latest week', () => {
+      userRepo = new UserRepository(userData);
+      expect(sleep.findAllHighQualitySleepers(['2019/06/14', '2019/06/21']).to.deep.equal([2, 3, 5]));
     });
 
     it('should be able to find the user who slept the most number of hours (one or more if they tied)', () => {
