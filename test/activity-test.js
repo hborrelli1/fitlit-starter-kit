@@ -34,9 +34,9 @@ describe('Activity', function() {
     expect(activity.getActivityDurationByDate(3, '2019/06/15')).to.equal(116);
   });
 
-  // it('should be able to calculate distance by week', function() {
-  //   expect(activity.getActivityByWeek(3, )).to.equal();
-  // });
+  it('should be able to calculate total acitivty time by week', function() {
+    expect(activity.getActivityByWeek(3, ['2019/06/14','2019/06/16'])).to.equal(268);
+  });
 
   it('should be able to check if a user did not meet their step goal on a given date', function() {
     expect(activity.checkUserStepGoalByDate(1, '2019/06/15')).to.equal(false);
@@ -54,4 +54,4 @@ describe('Activity', function() {
     expect(activity.getStairClimbingRecord(1)).to.equal(36);
   });
 
-})
+});
