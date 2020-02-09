@@ -14,6 +14,7 @@ describe('Sleep Tests', () => {
 
   beforeEach(() => {
     sleep = new Sleep(sleepData);
+    userRepo = new UserRepository(userData);
   });
 
   describe('class initialization', () => {
