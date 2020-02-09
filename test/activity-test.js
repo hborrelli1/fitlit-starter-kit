@@ -32,7 +32,7 @@ describe('Activity', function() {
     expect(activity.getDistanceByDate(3, '2019/06/15')).to.equal(6.17);
   });
 
-  it('should be able to calculate distance by date', function() {
+  it('should be able to calculate activity duration by date', function() {
     expect(activity.getActivityDurationByDate(3, '2019/06/15')).to.equal(116);
   });
 
@@ -67,4 +67,12 @@ describe('Activity', function() {
   it('should be able to calculate the average minutes of activity for all users on a given date', function() {
     expect(activity.getAvgActivity('minutesActive', '2019/06/16')).to.equal(918);
   });
+
+  it('should tell the user how many active minutes they had compared to all other users', function() {
+    expect(activity.findUserActivityStanding(1, 'minutesActive', '2019/06/16')).to.equal('On this day you had 175 minutes of activity while the average amount of activity for all users was 918 minutes');
+
+  })
+  // it('should be able to calculate the user who with the longest distance walked on a given date', function() {
+  //   expect(activity.findMostActiveUser(1, )).to.equal();
+  // });
 });
