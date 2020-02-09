@@ -2,11 +2,13 @@ const chai = require('chai');
 const expect = require('chai').expect;
 const Activity = require('../class/activity');
 const activityData = require('./datasets/activity-sample-data');
-const userData = require('./datasets/user-sample-data');
+const UserRepository = require('../class/user-repository');
+const userData = require('../test/datasets/user-sample-data');
 
 describe('Activity', function() {
 
   beforeEach(function(){
+    userRepo = new UserRepository(userData);
     activity = new Activity(activityData);
   });
 
@@ -54,4 +56,15 @@ describe('Activity', function() {
     expect(activity.getStairClimbingRecord(1)).to.equal(36);
   });
 
+  it('should be able to calculate the average number of stairs climbed by all users on a given date', function() {
+    expect(activity.getAvgActivity('flightsOfStairs', '2019/06/16')).to.equal(129);
+  });
+
+  it('should be able to calculate the average number of steps for all users on a given date', function() {
+    expect(activity.getAvgActivity('numSteps', '2019/06/16')).to.equal(43092);
+  });
+
+  it('should be able to calculate the average minutes of activity for all users on a given date', function() {
+    expect(activity.getAvgActivity('minutesActive', '2019/06/16')).to.equal(918);
+  });
 });
