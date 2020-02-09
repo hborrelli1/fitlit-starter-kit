@@ -24,7 +24,15 @@ class Activity {
     }).minutesActive;
   }
   getActivityByWeek(userID, dateRange) {
-
+    let userActivities = this.data.filter(function(activity) {
+      return (activity.userID === userID && (activity.date >= dateRange[0] && activity.date <= dateRange[1]))
+    });
+    let userActiveMin = userActivities.map(function(activity) {
+      return activity.minutesActive;
+    })
+    return userActiveMin.reduce(function(acc, arr) {
+      return (acc + arr);
+    },0)
   }
   checkUserStepGoalByDate(userID, date) {
     const userRepo = new UserRepository(userData);
@@ -65,7 +73,6 @@ if (typeof module !== 'undefined') {
 
 // getActivityByWeek(userID, dateRange)
 
-// getAllExceededStepGoalDates(userID)
 
 // getAvgActivity(activity, date)
 // findMostActiveUser() ** // Get user with the most days of activity
