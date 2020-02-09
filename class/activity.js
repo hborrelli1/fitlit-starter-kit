@@ -1,5 +1,3 @@
-const UserRepository = require('../class/user-repository');
-const userData = require('../test/datasets/user-sample-data');
 
 class Activity {
   constructor(data) {
@@ -7,7 +5,6 @@ class Activity {
   }
   getDistanceByDate(userID, date){
     const mile = 5280;
-    const userRepo = new UserRepository(userData);
     const strideLength = userRepo.getUserInfo(userID).strideLength;
     const stepAmount = this.getUserStepAmount(userID, date);
 
@@ -35,14 +32,12 @@ class Activity {
     },0)
   }
   checkUserStepGoalByDate(userID, date) {
-    const userRepo = new UserRepository(userData);
     const dailyStepGoal = userRepo.getUserInfo(userID).dailyStepGoal;
     const stepAmount = this.getUserStepAmount(userID, date);
 
     return stepAmount >= dailyStepGoal;
   }
   getAllExceededStepGoalDates(userID) {
-    const userRepo = new UserRepository(userData);
     const dailyStepGoal = userRepo.getUserInfo(userID).dailyStepGoal;
 
     let userActivities = this.data.filter(function(activity) {
@@ -64,15 +59,21 @@ class Activity {
     });
     return Math.max(...activitiesArray);
   }
+  getAvgActivity(activity, date) {
+    let userActivities = this.data.filter(function(activity) {
+      return activity.date === date;
+    });
+    let activityAmounts = userActivities.map(function(activityObj) {
+      return activityObj[activity];
+    });
+    return activityAmounts.reduce(function(acc, arr) {
+      return (acc + arr);
+    },0);
+  }
 }
 
 if (typeof module !== 'undefined') {
   module.exports = Activity;
 }
 
-
-// getActivityByWeek(userID, dateRange)
-
-
-// getAvgActivity(activity, date)
 // findMostActiveUser() ** // Get user with the most days of activity
