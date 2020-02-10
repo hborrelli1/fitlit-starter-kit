@@ -8,6 +8,17 @@ const firstName = document.getElementById('firstName');
 const totalStepGoal = document.getElementById('totalStepGoal');
 const waterComsumptionToday = document.getElementById('waterComsumptionToday');
 const weeklyConsumptionList = document.getElementById('weeklyConsumptionList');
+const userStepAmount = document.getElementById('user-step-amount');
+const userMileage = document.getElementById('user-mileage');
+const activityTotalDay = document.getElementById('activity-total-day');
+const activityTotalWeek = document.getElementById('activity-total-week');
+const stepGoalStatusDay = document.getElementById('step-goal-status');
+const stepGoalStatusWeek = document.getElementById('step-goal-status-week');
+const stairClimbingRecord = document.getElementById('stair-climbing-record');
+const stairClimbingAverage = document.getElementById('stair-climbing-average');
+const stepAverage = document.getElementById('step-average');
+const minutesAverage = document.getElementById('minutes-average');
+
 
 let userRepo = new UserRepository(userData);
 const allStepGoals = userRepo.calculateAvgTotalStepGoal();
@@ -63,3 +74,6 @@ strideLength.innerText = currentUser.strideLength;
 dailyStepGoal.innerText = currentUser.dailyStepGoal;
 friends.innerHTML = addFriendNames(names);
 totalStepGoal.innerText = allStepGoals;
+
+
+// Activity related DOM
