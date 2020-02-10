@@ -43,11 +43,18 @@ class Activity {
     let userActivities = this.data.filter(function(activity) {
       return activity.userID === userID;
     });
-    let activitiesArray = userActivities.map(function(activity) {
-      if(activity.numSteps >= dailyStepGoal){
-        return activity.date;
+    // let activitiesArray = userActivities.filter(function(activity) {
+    //   if(activity.numSteps >= dailyStepGoal) {
+    //     return activity.date;
+    //   };
+    // });
+    let activitiesArray = userActivities.reduce((acc, activity) => {
+      if(activity.numSteps >= dailyStepGoal) {
+        acc.push(activity.date);
       }
-    });
+      return acc;
+    },[])
+
     return activitiesArray;
   }
   getStairClimbingRecord(userID) {
