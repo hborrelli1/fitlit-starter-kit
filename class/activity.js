@@ -31,9 +31,6 @@ class Activity {
       return (acc + arr);
     },0);
   }
-
-
-
   checkUserStepGoalByDate(userID, date) {
     const dailyStepGoal = userRepo.getUserInfo(userID).dailyStepGoal;
     const stepAmount = this.getUserStepAmount(userID, date);
@@ -83,8 +80,6 @@ class Activity {
 
      return `On this day you had ${userActivityDuration} minutes of activity while the average amount of activity for all users was ${averageActivityDurationAllUsers} minutes`
   }
-
-
   // findMostActiveUser(userID, date){
   //   const currentUser = userRepo.getUserInfo(userID);
   //   const usersFriends = currentUser.friends;
@@ -99,5 +94,3 @@ class Activity {
 if (typeof module !== 'undefined') {
   module.exports = Activity;
 }
-
-// findMostActiveUser() ** // Get user with the most miles in one day
