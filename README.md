@@ -20,3 +20,7 @@ Add screenshots here.
 * JavaScript
 * Mocha/Chai
 * ** Add packages here -- **
+
+## Collaborators
+* @MandyAlford
+* @hborrelli1
