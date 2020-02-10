@@ -12,8 +12,11 @@ const userStepAmount = document.getElementById('user-step-amount');
 const userMileage = document.getElementById('user-mileage');
 const activityTotalDay = document.getElementById('activity-total-day');
 const activityTotalWeek = document.getElementById('activity-total-week');
+
+const stepsTotalWeek = document.getElementById('steps-total-week');
+const stairsTotalWeek = document.getElementById('stairs-total-week');
 const stepGoalStatusDay = document.getElementById('step-goal-status-day');
-const stepGoalStatusWeek = document.getElementById('step-goal-status-week');
+const stepGoalStatusAll = document.getElementById('step-goal-status-week');
 const stairClimbingRecord = document.getElementById('stair-climbing-record');
 const stairClimbingAverage = document.getElementById('stair-climbing-average');
 const stepAverage = document.getElementById('step-average');
@@ -39,10 +42,10 @@ let todaysDate = '2019/09/21';
 let lastDate = '2019/09/16';
 
 let userWaterConsumption = hydrationDataset.getTotalConsumedByDate(randNum, todaysDate);
-console.log(userWaterConsumption);
+// console.log(userWaterConsumption);
 
 let weeklyConsumption = hydrationDataset.getWeeklyConsumption(randNum, [todaysDate, lastDate]);
-console.log(weeklyConsumption);
+// console.log(weeklyConsumption);
 
 function populateWeeklyWaterConsumption() {
   // let days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -58,7 +61,7 @@ function populateWeeklyWaterConsumption() {
     return acc;
   }, 6);
 
-  console.log(totalForWeek);
+  // console.log(totalForWeek);
   weeklyConsumptionList.insertAdjacentHTML('beforeend', fullWeek);
 
 }
@@ -88,14 +91,25 @@ function stepGoalFeedback() {
     response = 'did not meet';
   }
   return response;
+};
+
+
+let stepGoalStats = activity.getAllExceededStepGoalDates(randNum);
+
+function getStepGoalPercentage() {
+
 }
+
+
 
 userStepAmount.innerText = activity.getUserStepAmount(randNum, todaysDate);
 userMileage.innerText = activity.getDistanceByDate(randNum, todaysDate);
 activityTotalDay.innerText = activity.getActivityDurationByDate(randNum, todaysDate);
-// activityTotalWeek.innerText = activity.getActivityByWeek(randNum, [todaysDate, lastDate]);
+activityTotalWeek.innerText = activity.getActivityByWeek(randNum, 'minutesActive', [lastDate, todaysDate]);
+stairsTotalWeek.innerText = activity.getActivityByWeek(randNum, 'flightsOfStairs', [lastDate, todaysDate]);
+stepsTotalWeek.innerText = activity.getActivityByWeek(randNum, 'numSteps', [lastDate, todaysDate]);
 stepGoalStatusDay.innerText = stepGoalFeedback();
-// stepGoalStatusWeek.innerText = activity.getAllExceededStepGoalDates(randNum);
+// stepGoalStatus.innerText = activity.getAllExceededStepGoalDates(randNum);
 stairClimbingRecord.innerText = activity.getStairClimbingRecord(randNum);
 stairClimbingAverage.innerText = activity.getAvgActivity('numSteps', todaysDate);
 stepAverage.innerText = activity.getAvgActivity('minutesActive', todaysDate);
