@@ -12,7 +12,7 @@ const userStepAmount = document.getElementById('user-step-amount');
 const userMileage = document.getElementById('user-mileage');
 const activityTotalDay = document.getElementById('activity-total-day');
 const activityTotalWeek = document.getElementById('activity-total-week');
-const stepGoalStatusDay = document.getElementById('step-goal-status');
+const stepGoalStatusDay = document.getElementById('step-goal-status-day');
 const stepGoalStatusWeek = document.getElementById('step-goal-status-week');
 const stairClimbingRecord = document.getElementById('stair-climbing-record');
 const stairClimbingAverage = document.getElementById('stair-climbing-average');
@@ -77,3 +77,26 @@ totalStepGoal.innerText = allStepGoals;
 
 
 // Activity related DOM
+let activity = new Activity(activityData);
+
+function stepGoalFeedback() {
+  let response
+  let result = activity.checkUserStepGoalByDate(randNum, todaysDate);
+  if(result === true) {
+    response = 'met';
+  } else {
+    response = 'did not meet';
+  }
+  return response;
+}
+
+userStepAmount.innerText = activity.getUserStepAmount(randNum, todaysDate);
+userMileage.innerText = activity.getDistanceByDate(randNum, todaysDate);
+activityTotalDay.innerText = activity.getActivityDurationByDate(randNum, todaysDate);
+// activityTotalWeek.innerText = activity.getActivityByWeek(randNum, [todaysDate, lastDate]);
+stepGoalStatusDay.innerText = stepGoalFeedback();
+// stepGoalStatusWeek.innerText = activity.getAllExceededStepGoalDates(randNum);
+stairClimbingRecord.innerText = activity.getStairClimbingRecord(randNum);
+stairClimbingAverage.innerText = activity.getAvgActivity('numSteps', todaysDate);
+stepAverage.innerText = activity.getAvgActivity('minutesActive', todaysDate);
+minutesAverage.innerText = activity.getAvgActivity('flightsOfStairs', todaysDate);
