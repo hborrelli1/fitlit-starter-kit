@@ -37,7 +37,15 @@ describe('Activity', function() {
   });
 
   it('should be able to calculate total acitivty time by week', function() {
-    expect(activity.getActivityByWeek(3, ['2019/06/14','2019/06/16'])).to.equal(268);
+    expect(activity.getActivityByWeek(3, 'minutesActive', ['2019/06/14','2019/06/16'])).to.equal(268);
+  });
+
+  it('should be able to calculate total flights of stairs by week', function() {
+    expect(activity.getActivityByWeek(3, 'flightsOfStairs', ['2019/06/14','2019/06/16'])).to.equal(41);
+  });
+
+  it('should be able to calculate total acitivty time by week', function() {
+    expect(activity.getActivityByWeek(3, 'numSteps', ['2019/06/14','2019/06/16'])).to.equal(19706);
   });
 
   it('should be able to check if a user did not meet their step goal on a given date', function() {
