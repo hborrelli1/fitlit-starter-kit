@@ -72,8 +72,6 @@ class Sleep {
     let usersEntries = [];
     let highQualitySleepers = [];
 
-    // console.log(this.userData);
-
     // Push all userIds into `userIds` array.
     userRepo.data.forEach(user => userIds.push(user.id));
 
@@ -84,7 +82,6 @@ class Sleep {
     userIds.forEach(id => {
       usersEntries.push(sleepEntriesByWeek.filter(entry => entry.userID === id));
     });
-    // console.log(usersEntries);
 
     // For each weekly entry, get average sleep quality.
     // If sleep quality is > 3, add usersId to
@@ -102,7 +99,6 @@ class Sleep {
       }
     });
 
-    // console.log(highQualitySleepers);
     return highQualitySleepers;
   }
 
@@ -127,9 +123,3 @@ class Sleep {
 if (typeof module !== 'undefined') {
   module.exports = Sleep;
 }
-
-
-// Methods:
-
-// findWorstSleeper(date) ** // Get user with least amount of total sleep
-//
