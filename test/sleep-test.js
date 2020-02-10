@@ -1,13 +1,20 @@
 // const chai = require("chai");
 const expect = require('chai').expect;
+const userData = require('../data/users');
 const Sleep = require('../class/sleep');
+const UserRepository = require('../class/user-repository');
+
 const sleepData = require('./datasets/sleep-sample-data');
+// const userData = require('../data/users');
+// const userRepo = new UserRepository(userData);
 
 describe('Sleep Tests', () => {
   let sleep;
+  let userRepo;
 
   beforeEach(() => {
     sleep = new Sleep(sleepData);
+    userRepo = new UserRepository(userData);
   });
 
   describe('class initialization', () => {
@@ -42,13 +49,40 @@ describe('Sleep Tests', () => {
     });
 
     it('should be able to calculate how many hours slept each day over the course of a given week (7 days)', () => {
-      expect(sleep.getSleepAmountByWeek(4, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/16', hoursSlept: 10.4}, {date: '2019/06/15', hoursSlept: 9.4}, {date: '2019/06/14', hoursSlept: 8.8}]);
+      expect(sleep.getSleepInfoByWeek(4, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/16', hoursSlept: 10.4, sleepQuality: 3}, {date: '2019/06/15', hoursSlept: 9.4, sleepQuality: 2.5}, {date: '2019/06/14', hoursSlept: 8.8, sleepQuality: 3}]);
     });
 
-    it('should be able to calculate their sleep quality each day over the course of a given week (7 days)', () => {
-      expect(sleep.getSleepQualityByWeek(5, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/15', sleepQuality: 3.6}]);
-      expect(sleep.getSleepQualityByWeek(4, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/16', sleepQuality: 3}, {date: '2019/06/15', sleepQuality: 2.5}, {date: '2019/06/14', sleepQuality: 3}]);
+    // it('should be able to calculate their sleep quality each day over the course of a given week (7 days)', () => {
+    //   expect(sleep.getSleepQualityByWeek(5, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/15', sleepQuality: 3.6}]);
+    //   expect(sleep.getSleepQualityByWeek(4, ['2019/06/14', '2019/06/21'])).to.deep.equal([{date: '2019/06/16', sleepQuality: 3}, {date: '2019/06/15', sleepQuality: 2.5}, {date: '2019/06/14', sleepQuality: 3}]);
+    // });
+
+    it('should be able to get the average sleep quality for all users', () => {
+      expect(sleep.getAllUsersAvgSleepQuality()).to.equal(3.5);
     });
+
+    it('should be able return users who average a sleep quality greater than 3 for a given week (7 days) - you should be able to calculate this for any week, not just the latest week', () => {
+      userRepo = new UserRepository(userData);
+      expect(sleep.findAllHighQualitySleepers(['2019/06/14', '2019/06/21'])).to.deep.equal([2, 3, 5]);
+    });
+
+    it('should be able to find the user who slept the most number of hours (one or more if they tied)', () => {
+      expect(sleep.getUserWhoSleptMost('2019/06/15')).to.deep.equal({
+        "userID": 3,
+        "date": "2019/06/15",
+        "hoursSlept": 10.8,
+        "sleepQuality": 4.7
+      });
+    });
+
+    it('should be able to find worst sleeper', () => {
+      expect(sleep.findWorstSleeper('2019/06/15')).to.deep.equal({
+        "userID": 1,
+        "date": "2019/06/15",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      })
+    });
+
   });
-
 });

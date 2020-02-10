@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
     <title>Activity Tracker</title>
@@ -48,49 +48,23 @@
       <section class="widget-container">
         <section class="widget hydration-widget">
           <h3>Hydration</h3>
-          <p class="total-consumed-today"><span id="waterComsumptionToday">empty</span>oz</p>
+          <p class="total-consumed-today"><span id="waterComsumptionToday"></span>oz</p>
           <p>Drank Today!</p>
           <p class="">Weekly consumption of water:</p>
-          <section id="weeklyConsumptionList" class="weekly-consumption-list">
-            <!-- <div>
-              <span class="day-of-week">S</span>
-              <span id="waterConsumption-0">8oz</span>
-            </div>
-            <div>
-              <span class="day-of-week">M</span>
-              <span id="waterConsumption-1"></span>
-            </div>
-            <div>
-              <span class="day-of-week">T</span>
-              <span id="waterConsumption-2"></span>
-            </div>
-            <div>
-              <span class="day-of-week">W</span>
-              <span id="waterConsumption-3"></span>
-            </div>
-            <div>
-              <span class="day-of-week">T</span>
-              <span id="waterConsumption-4"></span>
-            </div>
-            <div>
-              <span class="day-of-week">F</span>
-              <span id="waterConsumption-5"></span>
-            </div>
-            <div>
-              <span class="day-of-week">S</span>
-              <span id="waterConsumption-6"></span>
-            </div> -->
+          <section id="weeklyConsumptionList" class="weekly-list">
           </section>
         </section>
         <section class="widget sleep-widget">
           <h3>Sleep</h3>
-          <p class="average-hours-sleep-per-day">Average hours of sleep per day: <span>empty</span></p>
-          <p class="average-sleep-quality">Average sleep quality per day: <span>empty</span></p>
-          <p class="amount-slept-today">Hours of sleep today: <span>empty</span></p>
-          <p>Sleep quality today: <span>empty</span></p>
-          <p class="amount-slept-this-week">Hours of sleep this week: <span>empty</span></p>
-          <p class="sleep-quality-this-week">Sleep quality this week: <span>empty</span></p>
-          <p class="total-avg-sleep-quality-all">Average sleep quality for all users: <span>empty</span></p>
+          <p class="average-hours-sleep-per-day">Hours of sleep: <span id="hoursOfSleep"></span></p>
+          <p class="average-sleep-quality">Quality of Sleep: <span id="qualityOfSleep"></span></p>
+          <p class="">Weekly Sleep Information(hours/quality): </p>
+          <section id="weeklySleepList" class="weekly-list">
+          </section>
+          <section class="all-time-info">
+            <p>Average sleep quality: <span id="allTimeSleepQuality"></span></p>
+            <p>Average hours of sleep: <span id="allTimeSleepHours"></span></p>
+          </section>
         </section>
         <section class="widget activity-widget">
           <h3>Activity</h3>
