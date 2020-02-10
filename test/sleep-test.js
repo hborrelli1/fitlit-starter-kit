@@ -63,7 +63,7 @@ describe('Sleep Tests', () => {
 
     it('should be able return users who average a sleep quality greater than 3 for a given week (7 days) - you should be able to calculate this for any week, not just the latest week', () => {
       userRepo = new UserRepository(userData);
-      expect(sleep.findAllHighQualitySleepers(['2019/06/14', '2019/06/21']).to.deep.equal([2, 3, 5]));
+      expect(sleep.findAllHighQualitySleepers(['2019/06/14', '2019/06/21'])).to.deep.equal([2, 3, 5]);
     });
 
     it('should be able to find the user who slept the most number of hours (one or more if they tied)', () => {

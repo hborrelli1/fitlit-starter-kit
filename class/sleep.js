@@ -8,7 +8,6 @@ class Sleep {
 
     let totalHoursSlept = userInfo.reduce((total, sleepEntry) => {
       total += sleepEntry.hoursSlept;
-
       return total;
     }, 0);
 
@@ -73,7 +72,7 @@ class Sleep {
     let usersEntries = [];
     let highQualitySleepers = [];
 
-    console.log(this.userData);
+    // console.log(this.userData);
 
     // Push all userIds into `userIds` array.
     userRepo.data.forEach(user => userIds.push(user.id));
@@ -85,7 +84,7 @@ class Sleep {
     userIds.forEach(id => {
       usersEntries.push(sleepEntriesByWeek.filter(entry => entry.userID === id));
     });
-    console.log(usersEntries);
+    // console.log(usersEntries);
 
     // For each weekly entry, get average sleep quality.
     // If sleep quality is > 3, add usersId to
@@ -103,7 +102,8 @@ class Sleep {
       }
     });
 
-    console.log(highQualitySleepers);
+    // console.log(highQualitySleepers);
+    return highQualitySleepers;
   }
 
   getUserWhoSleptMost(date) {
