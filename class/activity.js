@@ -20,14 +20,14 @@ class Activity {
       return ((user.userID === userID) && (user.date === date));
     }).minutesActive;
   }
-  getActivityByWeek(userID, dateRange) {
+  getActivityByWeek(userID, activityType, dateRange) {
     let userActivities = this.data.filter(function(activity) {
       return (activity.userID === userID && (activity.date >= dateRange[0] && activity.date <= dateRange[1]))
     });
-    let userActiveMin = userActivities.map(function(activity) {
-      return activity.minutesActive;
+    let userActivityType = userActivities.map(function(activity) {
+      return activity[activityType];
     });
-    return userActiveMin.reduce(function(acc, arr) {
+    return userActivityType.reduce(function(acc, arr) {
       return (acc + arr);
     },0);
   }
@@ -43,11 +43,13 @@ class Activity {
     let userActivities = this.data.filter(function(activity) {
       return activity.userID === userID;
     });
-    let activitiesArray = userActivities.map(function(activity) {
-      if(activity.numSteps >= dailyStepGoal){
-        return activity.date;
+    let activitiesArray = userActivities.reduce((acc, activity) => {
+      if(activity.numSteps >= dailyStepGoal) {
+        acc.push(activity.date);
       }
-    });
+      return acc;
+    },[])
+
     return activitiesArray;
   }
   getStairClimbingRecord(userID) {
@@ -66,9 +68,10 @@ class Activity {
     let activityAmounts = userActivities.map(function(activityObj) {
       return activityObj[activity];
     });
-    return activityAmounts.reduce(function(acc, arr) {
+    let total = activityAmounts.reduce(function(acc, arr) {
       return (acc + arr);
     },0);
+    return Number((total/userActivities.length).toFixed());
   }
   findUserActivityStanding(userID, activity, date){
      const currentUser = userRepo.getUserInfo(userID);
@@ -77,6 +80,18 @@ class Activity {
      const averageActivityDurationAllUsers = this.getAvgActivity(activity, date);
 
      return `On this day you had ${userActivityDuration} minutes of activity while the average amount of activity for all users was ${averageActivityDurationAllUsers} minutes`
+  }
+  getDistanceRecord(userID) {
+    const mile = 5280;
+    const strideLength = userRepo.getUserInfo(userID).strideLength;
+
+    let userActivities = this.data.filter(function(activity) {
+      return activity.userID === userID;
+    });
+    let stepAmount = Math.max(...userActivities.map(function(activity) {
+      return activity.numSteps;
+    }));
+    return parseFloat(((strideLength * stepAmount) / mile).toFixed(2));
   }
   // findMostActiveUser(userID, date){
   //   const currentUser = userRepo.getUserInfo(userID);
@@ -92,5 +107,3 @@ class Activity {
 if (typeof module !== 'undefined') {
   module.exports = Activity;
 }
-
-// findMostActiveUser() ** // Get user with the most miles in one day
