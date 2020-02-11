@@ -29,6 +29,7 @@ const weeklySleepList = document.getElementById('weeklySleepList');
 const allTimeSleepQuality = document.getElementById('allTimeSleepQuality');
 const allTimeSleepHours = document.getElementById('allTimeSleepHours');
 const qualityOfSleepRecord = document.getElementById('qualityOfSleepRecord');
+const stepChallenge = document.getElementById('step-challenge');
 
 // Initialize Data
 const userRepo = new UserRepository(userData);
@@ -111,12 +112,32 @@ function stepGoalFeedback() {
   return response;
 };
 
+function findStepChallengeWinner(userID, activityType, dateRange) {
+  let userAndFriends = [];
+  let htmlToAdd = '';
+  // let currentUserFirstName = 'You;
+  let currentUserStepCount = activity.getActivityByWeek(userID, activityType, dateRange);
+
+  userAndFriends.push({name: 'Your step count', stepTotal: currentUserStepCount});
+  currentUser.friends.forEach(friend => {
+    let user = new User(userRepo.getUserInfo(friend));
+    userAndFriends.push({name: user.name, stepTotal: activity.getActivityByWeek(friend, activityType, dateRange)});
+  });
+  userAndFriends.sort((a, b) => {
+    return b.stepTotal - a.stepTotal;
+  });
+  userAndFriends.forEach(user => {
+    htmlToAdd += `<li>${user.name}: ${user.stepTotal}</li>`;
+  });
+  stepChallenge.insertAdjacentHTML('beforeend', htmlToAdd);
+    // insertAdjacentHTML htmlToAdd to DOM.
+};
+
+findStepChallengeWinner(randNum, 'numSteps', [lastDate, todaysDate])
 
 let stepGoalStats = activity.getAllExceededStepGoalDates(randNum);
 
-function getStepGoalPercentage() {
 
-}
 
 activity.getDistanceRecord(randNum);
 
@@ -133,6 +154,7 @@ stairClimbingAverage.innerText = activity.getAvgActivity('flightsOfStairs', toda
 stepAverage.innerText = activity.getAvgActivity('numSteps', todaysDate);
 minutesAverage.innerText = activity.getAvgActivity('minutesActive', todaysDate);
 mileageRecord.innerText = activity.getDistanceRecord(randNum);
+
 // Populate Hours of sleep
 const populateHoursOfSleep = () => {
   hoursOfSleep.innerHTML = sleepDataset.getSleepAmountByDate(randNum, todaysDate);
