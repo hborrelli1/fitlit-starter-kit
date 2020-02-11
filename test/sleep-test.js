@@ -75,13 +75,9 @@ describe('Sleep Tests', () => {
       });
     });
 
-    it('should be able to find worst sleeper', () => {
-      expect(sleep.findWorstSleeper('2019/06/15')).to.deep.equal({
-        "userID": 1,
-        "date": "2019/06/15",
-        "hoursSlept": 6.1,
-        "sleepQuality": 2.2
-      })
+    it('should be able to best sleep quality record for a user', () => {
+      expect(sleep.findSleepQualityRecord(4)).to.equal(3);
+      expect(sleep.findSleepQualityRecord(2)).to.equal(4.7);
     });
 
   });
