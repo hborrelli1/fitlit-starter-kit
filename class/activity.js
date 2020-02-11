@@ -93,15 +93,6 @@ class Activity {
     }));
     return parseFloat(((strideLength * stepAmount) / mile).toFixed(2));
   }
-  // findMostActiveUser(userID, date){
-  //   const currentUser = userRepo.getUserInfo(userID);
-  //   const usersFriends = currentUser.friends;
-  //
-  //   console.log(currentUser);
-  //   console.log(usersFriends);
-  //
-  //   getDistanceByDate(userID, date);
-  // }
 }
 
 if (typeof module !== 'undefined') {
