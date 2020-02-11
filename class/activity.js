@@ -68,9 +68,10 @@ class Activity {
     let activityAmounts = userActivities.map(function(activityObj) {
       return activityObj[activity];
     });
-    return activityAmounts.reduce(function(acc, arr) {
+    let total = activityAmounts.reduce(function(acc, arr) {
       return (acc + arr);
     },0);
+    return Number((total/userActivities.length).toFixed());
   }
   findUserActivityStanding(userID, activity, date){
      const currentUser = userRepo.getUserInfo(userID);

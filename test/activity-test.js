@@ -65,19 +65,19 @@ describe('Activity', function() {
   });
 
   it('should be able to calculate the average number of stairs climbed by all users on a given date', function() {
-    expect(activity.getAvgActivity('flightsOfStairs', '2019/06/16')).to.equal(129);
+    expect(activity.getAvgActivity('flightsOfStairs', '2019/06/16')).to.equal(26);
   });
 
   it('should be able to calculate the average number of steps for all users on a given date', function() {
-    expect(activity.getAvgActivity('numSteps', '2019/06/16')).to.equal(43092);
+    expect(activity.getAvgActivity('numSteps', '2019/06/16')).to.equal(8618);
   });
 
   it('should be able to calculate the average minutes of activity for all users on a given date', function() {
-    expect(activity.getAvgActivity('minutesActive', '2019/06/16')).to.equal(918);
+    expect(activity.getAvgActivity('minutesActive', '2019/06/16')).to.equal(184);
   });
 
   it('should tell the user how many active minutes they had compared to all other users', function() {
-    expect(activity.findUserActivityStanding(1, 'minutesActive', '2019/06/16')).to.equal('On this day you had 175 minutes of activity while the average amount of activity for all users was 918 minutes');
+    expect(activity.findUserActivityStanding(1, 'minutesActive', '2019/06/16')).to.equal('On this day you had 175 minutes of activity while the average amount of activity for all users was 184 minutes');
 
   })
   // it('should be able to calculate the user who with the longest distance walked on a given date', function() {

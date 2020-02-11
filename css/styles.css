@@ -63,15 +63,15 @@ main {
   width:100%;
 }
 
-.widget-container .weekly-consumption-list {
+.widget-container .weekly-list {
   display:flex;
 }
 
-.widget-container .weekly-consumption-list div {
+.widget-container .weekly-list div {
   text-align:center;
   width:100%;
 }
 
-.widget-container .weekly-consumption-list div * {
+.widget-container .weekly-list div * {
   display:block;
 }
