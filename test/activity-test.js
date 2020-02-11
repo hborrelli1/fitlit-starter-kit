@@ -78,8 +78,11 @@ describe('Activity', function() {
 
   it('should tell the user how many active minutes they had compared to all other users', function() {
     expect(activity.findUserActivityStanding(1, 'minutesActive', '2019/06/16')).to.equal('On this day you had 175 minutes of activity while the average amount of activity for all users was 184 minutes');
+  });
 
-  })
+  it('should tell a user their longest mileage record', function() {
+    expect(activity.getDistanceRecord(1)).to.equal(5.41);
+  });
   // it('should be able to calculate the user who with the longest distance walked on a given date', function() {
   //   expect(activity.findMostActiveUser(1, )).to.equal();
   // });
