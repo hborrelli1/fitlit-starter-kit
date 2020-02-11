@@ -13,6 +13,7 @@ const qualityOfSleep = document.getElementById('qualityOfSleep');
 const weeklySleepList = document.getElementById('weeklySleepList');
 const allTimeSleepQuality = document.getElementById('allTimeSleepQuality');
 const allTimeSleepHours = document.getElementById('allTimeSleepHours');
+const qualityOfSleepRecord = document.getElementById('qualityOfSleepRecord');
 
 // Initialize Data
 const userRepo = new UserRepository(userData);
@@ -126,3 +127,9 @@ const populateAllTimeAvgSleepHours = () => {
 }
 
 populateAllTimeAvgSleepHours();
+
+const populateQualityOfSleepRecord = () => {
+  qualityOfSleepRecord.innerHTML = sleepDataset.findSleepQualityRecord(randNum);
+}
+
+populateQualityOfSleepRecord();
