@@ -8,6 +8,21 @@ const firstName = document.getElementById('firstName');
 const totalStepGoal = document.getElementById('totalStepGoal');
 const waterComsumptionToday = document.getElementById('waterComsumptionToday');
 const weeklyConsumptionList = document.getElementById('weeklyConsumptionList');
+const userStepAmount = document.getElementById('user-step-amount');
+const userMileage = document.getElementById('user-mileage');
+const activityTotalDay = document.getElementById('activity-total-day');
+const activityTotalWeek = document.getElementById('activity-total-week');
+
+const stepsTotalWeek = document.getElementById('steps-total-week');
+const stairsTotalWeek = document.getElementById('stairs-total-week');
+const stepGoalStatusDay = document.getElementById('step-goal-status-day');
+const stepGoalStatusAll = document.getElementById('step-goal-status-week');
+const stairClimbingRecord = document.getElementById('stair-climbing-record');
+const stairClimbingAverage = document.getElementById('stair-climbing-average');
+const stepAverage = document.getElementById('step-average');
+const minutesAverage = document.getElementById('minutes-average');
+const mileageRecord = document.getElementById('mileage-record');
+
 const hoursOfSleep = document.getElementById('hoursOfSleep');
 const qualityOfSleep = document.getElementById('qualityOfSleep');
 const weeklySleepList = document.getElementById('weeklySleepList');
@@ -56,6 +71,7 @@ const populateWeeklyWaterConsumption = () => {
     return acc;
   }, 0);
 
+  // console.log(totalForWeek);
   weeklyConsumptionList.insertAdjacentHTML('beforeend', fullWeek);
 }
 
@@ -79,6 +95,43 @@ dailyStepGoal.innerText = currentUser.dailyStepGoal;
 friends.innerHTML = addFriendNames(names);
 totalStepGoal.innerText = allStepGoals;
 
+
+// Activity related DOM
+let activity = new Activity(activityData);
+
+function stepGoalFeedback() {
+  let response
+  let result = activity.checkUserStepGoalByDate(randNum, todaysDate);
+  if(result === true) {
+    response = 'met';
+  } else {
+    response = 'did not meet';
+  }
+  return response;
+};
+
+
+let stepGoalStats = activity.getAllExceededStepGoalDates(randNum);
+
+function getStepGoalPercentage() {
+
+}
+
+activity.getDistanceRecord(randNum);
+
+userStepAmount.innerText = activity.getUserStepAmount(randNum, todaysDate);
+userMileage.innerText = activity.getDistanceByDate(randNum, todaysDate);
+activityTotalDay.innerText = activity.getActivityDurationByDate(randNum, todaysDate);
+activityTotalWeek.innerText = activity.getActivityByWeek(randNum, 'minutesActive', [lastDate, todaysDate]);
+stairsTotalWeek.innerText = activity.getActivityByWeek(randNum, 'flightsOfStairs', [lastDate, todaysDate]);
+stepsTotalWeek.innerText = activity.getActivityByWeek(randNum, 'numSteps', [lastDate, todaysDate]);
+stepGoalStatusDay.innerText = stepGoalFeedback();
+// stepGoalStatus.innerText = activity.getAllExceededStepGoalDates(randNum);
+stairClimbingRecord.innerText = activity.getStairClimbingRecord(randNum);
+stairClimbingAverage.innerText = activity.getAvgActivity('flightsOfStairs', todaysDate);
+stepAverage.innerText = activity.getAvgActivity('numSteps', todaysDate);
+minutesAverage.innerText = activity.getAvgActivity('minutesActive', todaysDate);
+mileageRecord.innerText = activity.getDistanceRecord(randNum);
 // Populate Hours of sleep
 const populateHoursOfSleep = () => {
   hoursOfSleep.innerHTML = sleepDataset.getSleepAmountByDate(randNum, todaysDate);

@@ -37,7 +37,15 @@ describe('Activity', function() {
   });
 
   it('should be able to calculate total acitivty time by week', function() {
-    expect(activity.getActivityByWeek(3, ['2019/06/14','2019/06/16'])).to.equal(268);
+    expect(activity.getActivityByWeek(3, 'minutesActive', ['2019/06/14','2019/06/16'])).to.equal(268);
+  });
+
+  it('should be able to calculate total flights of stairs by week', function() {
+    expect(activity.getActivityByWeek(3, 'flightsOfStairs', ['2019/06/14','2019/06/16'])).to.equal(41);
+  });
+
+  it('should be able to calculate total acitivty time by week', function() {
+    expect(activity.getActivityByWeek(3, 'numSteps', ['2019/06/14','2019/06/16'])).to.equal(19706);
   });
 
   it('should be able to check if a user did not meet their step goal on a given date', function() {
@@ -57,21 +65,24 @@ describe('Activity', function() {
   });
 
   it('should be able to calculate the average number of stairs climbed by all users on a given date', function() {
-    expect(activity.getAvgActivity('flightsOfStairs', '2019/06/16')).to.equal(129);
+    expect(activity.getAvgActivity('flightsOfStairs', '2019/06/16')).to.equal(26);
   });
 
   it('should be able to calculate the average number of steps for all users on a given date', function() {
-    expect(activity.getAvgActivity('numSteps', '2019/06/16')).to.equal(43092);
+    expect(activity.getAvgActivity('numSteps', '2019/06/16')).to.equal(8618);
   });
 
   it('should be able to calculate the average minutes of activity for all users on a given date', function() {
-    expect(activity.getAvgActivity('minutesActive', '2019/06/16')).to.equal(918);
+    expect(activity.getAvgActivity('minutesActive', '2019/06/16')).to.equal(184);
   });
 
   it('should tell the user how many active minutes they had compared to all other users', function() {
-    expect(activity.findUserActivityStanding(1, 'minutesActive', '2019/06/16')).to.equal('On this day you had 175 minutes of activity while the average amount of activity for all users was 918 minutes');
+    expect(activity.findUserActivityStanding(1, 'minutesActive', '2019/06/16')).to.equal('On this day you had 175 minutes of activity while the average amount of activity for all users was 184 minutes');
+  });
 
-  })
+  it('should tell a user their longest mileage record', function() {
+    expect(activity.getDistanceRecord(1)).to.equal(5.41);
+  });
   // it('should be able to calculate the user who with the longest distance walked on a given date', function() {
   //   expect(activity.findMostActiveUser(1, )).to.equal();
   // });
