@@ -110,12 +110,12 @@ class Sleep {
     })[0];
   }
 
-  findWorstSleeper(date) {
-    let sleepForDate = this.data.filter(user => user.date === date);
+  findSleepQualityRecord(userID) {
+    let sleepByUser = this.data.filter(sleep => sleep.userID === userID);
 
-    return sleepForDate.sort((a, b) => {
-      return b.hoursSlept - a.hoursSlept;
-    })[sleepForDate.length - 1];
+    return sleepByUser.reduce((acc, sleep) => {
+      return Math.max(acc, sleep.sleepQuality)
+    },0);
   }
 
 }
