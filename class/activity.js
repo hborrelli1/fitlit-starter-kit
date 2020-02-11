@@ -81,6 +81,18 @@ class Activity {
 
      return `On this day you had ${userActivityDuration} minutes of activity while the average amount of activity for all users was ${averageActivityDurationAllUsers} minutes`
   }
+  getDistanceRecord(userID) {
+    const mile = 5280;
+    const strideLength = userRepo.getUserInfo(userID).strideLength;
+
+    let userActivities = this.data.filter(function(activity) {
+      return activity.userID === userID;
+    });
+    let stepAmount = Math.max(...userActivities.map(function(activity) {
+      return activity.numSteps;
+    }));
+    return parseFloat(((strideLength * stepAmount) / mile).toFixed(2));
+  }
   // findMostActiveUser(userID, date){
   //   const currentUser = userRepo.getUserInfo(userID);
   //   const usersFriends = currentUser.friends;
