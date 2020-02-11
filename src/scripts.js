@@ -21,6 +21,7 @@ const stairClimbingRecord = document.getElementById('stair-climbing-record');
 const stairClimbingAverage = document.getElementById('stair-climbing-average');
 const stepAverage = document.getElementById('step-average');
 const minutesAverage = document.getElementById('minutes-average');
+const mileageRecord = document.getElementById('mileage-record');
 
 const hoursOfSleep = document.getElementById('hoursOfSleep');
 const qualityOfSleep = document.getElementById('qualityOfSleep');
@@ -116,7 +117,7 @@ function getStepGoalPercentage() {
 
 }
 
-
+activity.getDistanceRecord(randNum);
 
 userStepAmount.innerText = activity.getUserStepAmount(randNum, todaysDate);
 userMileage.innerText = activity.getDistanceByDate(randNum, todaysDate);
@@ -130,6 +131,7 @@ stairClimbingRecord.innerText = activity.getStairClimbingRecord(randNum);
 stairClimbingAverage.innerText = activity.getAvgActivity('flightsOfStairs', todaysDate);
 stepAverage.innerText = activity.getAvgActivity('numSteps', todaysDate);
 minutesAverage.innerText = activity.getAvgActivity('minutesActive', todaysDate);
+mileageRecord.innerText = activity.getDistanceRecord(randNum);
 // Populate Hours of sleep
 const populateHoursOfSleep = () => {
   hoursOfSleep.innerHTML = sleepDataset.getSleepAmountByDate(randNum, todaysDate);
