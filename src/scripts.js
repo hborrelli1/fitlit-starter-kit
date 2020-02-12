@@ -211,35 +211,26 @@ const populateQualityOfSleepRecord = () => {
 populateQualityOfSleepRecord();
 
 
-// filter all activty objects for user into array
-// loop over the array
-// for each activity object, grab the index
-// look at the numSteps for thatObj
-// have a conditional that checks the numSteps on +1 to see if they are greater than current index's numsteps value, then +2 index value > +1 (loop w/in loop?)
-// return an object with key of ? and value of range of corresponding dates in streak
-
 function findStreaks(randNum) {
-let activities =  activity.data.filter(function(activityObj) {
-    return activityObj.userID === randNum;
-  });
+  let activities =  activity.data.filter(function(activityObj) {
+      return activityObj.userID === randNum;
+    });
   let incrementingDays = [];
-  let counter = 0;
+
   for (var i = 0; i < activities.length - 2; i++) {
-
-    if (activities[i+1].numSteps > activities[i].numSteps) {
-      console.log('hi');
-      counter++;
-      if (activities[i+2].numSteps > activities[i + 1].numSteps) {
-        counter++;
-        let streakDates = [];
-
-        streakDates.push(activities[i].date.substring(5))
-        streakDates.push(activities[i + 1].date.substring(5))
-        streakDates.push(activities[i + 2].date.substring(5))
-        incrementingDays.push(streakDates);
-        counter = 0;
+    let streak = [];
+    streak.push(activities[i].date.substring(5));
+    for( var j = i+1; j < activities.length; j++){
+      if(activities[j].numSteps > activities[j-1].numSteps) {
+        streak.push(activities[j].date.substring(5));
       } else {
-        counter = 0;
+        if (streak.length >= 3) {
+          incrementingDays.push(streak);
+          streak = [];
+        } else {
+          i = activities.indexOf(activities[j]);
+          streak = [];
+        }
       }
     }
   }
@@ -252,19 +243,8 @@ function populateDOMStreakChallenge(incrementingDays) {
   let allStreaks = '';
 
   incrementingDays.forEach(function(arr) {
+
     allStreaks += `<li>${arr.join(', ')}</li>`
   });
   streakChallenge.insertAdjacentHTML('beforeend', allStreaks);
 }
-
-
-
-  // let counter = 0;
-  // for(var i = 0; i < activities.length; i++) {
-  //   for(var j = i+1; j <)
-
-
-
-      // if((activity[i].numSteps < activity[i+1].numSteps) && (activity[i+1].numSteps< activity[i+2].numSteps)) {
-      //   return activity[]
-      // }
