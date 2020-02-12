@@ -29,6 +29,8 @@ const weeklySleepList = document.getElementById('weeklySleepList');
 const allTimeSleepQuality = document.getElementById('allTimeSleepQuality');
 const allTimeSleepHours = document.getElementById('allTimeSleepHours');
 const qualityOfSleepRecord = document.getElementById('qualityOfSleepRecord');
+const stepChallenge = document.getElementById('step-challenge');
+const streakChallenge = document.getElementById('streak-challenge');
 
 // Initialize Data
 const userRepo = new UserRepository(userData);
@@ -111,12 +113,32 @@ function stepGoalFeedback() {
   return response;
 };
 
+function findStepChallengeWinner(userID, activityType, dateRange) {
+  let userAndFriends = [];
+  let htmlToAdd = '';
+  // let currentUserFirstName = 'You;
+  let currentUserStepCount = activity.getActivityByWeek(userID, activityType, dateRange);
+
+  userAndFriends.push({name: 'Your step count', stepTotal: currentUserStepCount});
+  currentUser.friends.forEach(friend => {
+    let user = new User(userRepo.getUserInfo(friend));
+    userAndFriends.push({name: user.name, stepTotal: activity.getActivityByWeek(friend, activityType, dateRange)});
+  });
+  userAndFriends.sort((a, b) => {
+    return b.stepTotal - a.stepTotal;
+  });
+  userAndFriends.forEach(user => {
+    htmlToAdd += `<li>${user.name}: ${user.stepTotal}</li>`;
+  });
+  stepChallenge.insertAdjacentHTML('beforeend', htmlToAdd);
+    // insertAdjacentHTML htmlToAdd to DOM.
+};
+
+findStepChallengeWinner(randNum, 'numSteps', [lastDate, todaysDate])
 
 let stepGoalStats = activity.getAllExceededStepGoalDates(randNum);
 
-function getStepGoalPercentage() {
 
-}
 
 activity.getDistanceRecord(randNum);
 
@@ -133,6 +155,7 @@ stairClimbingAverage.innerText = activity.getAvgActivity('flightsOfStairs', toda
 stepAverage.innerText = activity.getAvgActivity('numSteps', todaysDate);
 minutesAverage.innerText = activity.getAvgActivity('minutesActive', todaysDate);
 mileageRecord.innerText = activity.getDistanceRecord(randNum);
+
 // Populate Hours of sleep
 const populateHoursOfSleep = () => {
   hoursOfSleep.innerHTML = sleepDataset.getSleepAmountByDate(randNum, todaysDate);
@@ -182,3 +205,42 @@ populateWeeklySleepInfo(randNum, [todaysDate, lastDate]);
 populateAllTimeAvgSleepQuality();
 populateAllTimeAvgSleepHours();
 populateQualityOfSleepRecord();
+
+
+function findStreaks(randNum) {
+  let activities =  activity.data.filter(function(activityObj) {
+      return activityObj.userID === randNum;
+    });
+  let incrementingDays = [];
+
+  for (var i = 0; i < activities.length - 2; i++) {
+    let streak = [];
+    streak.push(activities[i].date.substring(5));
+    for( var j = i+1; j < activities.length; j++){
+      if(activities[j].numSteps > activities[j-1].numSteps) {
+        streak.push(activities[j].date.substring(5));
+      } else {
+        if (streak.length >= 3) {
+          incrementingDays.push(streak);
+          streak = [];
+        } else {
+          i = activities.indexOf(activities[j]);
+          streak = [];
+        }
+      }
+    }
+  }
+  populateDOMStreakChallenge(incrementingDays);
+}
+
+findStreaks(randNum);
+
+function populateDOMStreakChallenge(incrementingDays) {
+  let allStreaks = '';
+
+  incrementingDays.forEach(function(arr) {
+
+    allStreaks += `<li>${arr.join(', ')}</li>`
+  });
+  streakChallenge.insertAdjacentHTML('beforeend', allStreaks);
+}

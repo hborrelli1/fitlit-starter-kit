@@ -49,20 +49,21 @@ main {
   padding:2em;
   border-radius:4px;
   box-shadow: 0px 1px 12px 1px #afafaf;
-}
-
-.widget-container .hydration-widget,
-.widget-container .sleep-widget {
   width:calc(50% - 2em);
 }
+
+/* .widget-container .hydration-widget,
+.widget-container .sleep-widget {
+  width:calc(50% - 2em);
+} */
 
 .widget-container .widget span {
   font-weight:bold;
 }
 
-.widget-container .activity-widget {
+/* .widget-container .activity-widget {
   width:100%;
-}
+} */
 
 .widget-container .weekly-list {
   display:flex;
