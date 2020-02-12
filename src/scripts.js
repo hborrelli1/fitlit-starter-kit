@@ -110,6 +110,30 @@ function findStepChallengeWinner(userID, activityType, dateRange) {
   stepChallenge.insertAdjacentHTML('beforeend', htmlToAdd);
 }
 
+const findStairMaster = (userID) => {
+  let userStairRecord = activity.getStairClimbingRecord(userID);
+
+  let usersFriends = currentUser.friends;
+
+  let friendsStairRecords = usersFriends.reduce((acc, friendID) => {
+    let friendRecord = {};
+    let record = activity.getStairClimbingRecord(friendID);
+    friendRecord.id = friendID;
+    friendRecord.record = record;
+    acc.push(friendRecord);
+    return acc;
+  }, []);
+
+  let friendsRecords = friendsStairRecords.reduce((acc, friendRecord) => {
+    let user = userData.find(user => user.id === friendRecord.id);
+    acc.push({id: user.name, record: friendRecord.record});
+    return acc;
+  }, []);
+
+}
+
+findStairMaster(randNum);
+
 const populateActivityInfoDOM = () => {
   activity.getDistanceRecord(randNum);
   userStepAmount.innerText = activity.getUserStepAmount(randNum, todaysDate);
