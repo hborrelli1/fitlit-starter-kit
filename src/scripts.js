@@ -12,7 +12,6 @@ const userStepAmount = document.getElementById('user-step-amount');
 const userMileage = document.getElementById('user-mileage');
 const activityTotalDay = document.getElementById('activity-total-day');
 const activityTotalWeek = document.getElementById('activity-total-week');
-
 const stepsTotalWeek = document.getElementById('steps-total-week');
 const stairsTotalWeek = document.getElementById('stairs-total-week');
 const stepGoalStatusDay = document.getElementById('step-goal-status-day');
@@ -22,7 +21,6 @@ const stairClimbingAverage = document.getElementById('stair-climbing-average');
 const stepAverage = document.getElementById('step-average');
 const minutesAverage = document.getElementById('minutes-average');
 const mileageRecord = document.getElementById('mileage-record');
-
 const hoursOfSleep = document.getElementById('hoursOfSleep');
 const qualityOfSleep = document.getElementById('qualityOfSleep');
 const weeklySleepList = document.getElementById('weeklySleepList');
@@ -32,14 +30,19 @@ const qualityOfSleepRecord = document.getElementById('qualityOfSleepRecord');
 const stepChallenge = document.getElementById('step-challenge');
 const streakChallenge = document.getElementById('streak-challenge');
 
-// Initialize Data
 const userRepo = new UserRepository(userData);
 const allStepGoals = userRepo.calculateAvgTotalStepGoal();
 let randNum = Math.floor(Math.random() * 50) + 1;
 let currentUser = new User(userRepo.getUserInfo(randNum));
 let names = userRepo.getFriends(currentUser.friends);
+let hydrationDataset = new Hydration(hydrationData);
+let sleepDataset = new Sleep(sleepData);
+let activity = new Activity(activityData);
+let todaysDate = '2019/09/22';
+let lastDate = '2019/09/16';
+let userWaterConsumption = hydrationDataset.getTotalConsumedByDate(randNum, todaysDate);
+let stepGoalStats = activity.getAllExceededStepGoalDates(randNum);
 
-// Add Friends
 function addFriendNames(){
   let friends = names.map(function(name){
     return `<li>${name}</li>`
@@ -47,19 +50,6 @@ function addFriendNames(){
   return friends.join(' ');
 }
 
-// Get hydration info
-let hydrationDataset = new Hydration(hydrationData);
-let sleepDataset = new Sleep(sleepData);
-
-// Set todays date and previous week date.\
-let todaysDate = '2019/09/22';
-let lastDate = '2019/09/16';
-
-// Get water consumption
-let userWaterConsumption = hydrationDataset.getTotalConsumedByDate(randNum, todaysDate);
-
-
-// Populate Water Consumption
 const populateWeeklyWaterConsumption = () => {
   let weeklyConsumption = hydrationDataset.getWeeklyConsumption(randNum, [todaysDate, lastDate]);
   let fullWeek = '';
@@ -70,37 +60,25 @@ const populateWeeklyWaterConsumption = () => {
       <span class="day-of-week">${date}</span>
       <span>${day.numOfOunces}</span>
     </div>`;
-    // acc++;
     return acc;
   }, 0);
-
-  // console.log(totalForWeek);
   weeklyConsumptionList.insertAdjacentHTML('beforeend', fullWeek);
 }
 
-populateWeeklyWaterConsumption();
-
-
-// Populate DOM with User information
 const populateWaterConsumption = () => {
   waterComsumptionToday.innerHTML = userWaterConsumption;
 }
 
-populateWaterConsumption();
-
-
-firstName.innerHTML = `Welcome back, ${currentUser.returnUsersFirstName()}!`;
-userName.innerText = currentUser.name;
-address.innerText = currentUser.address;
-email.innerText = currentUser.email;
-strideLength.innerText = currentUser.strideLength;
-dailyStepGoal.innerText = currentUser.dailyStepGoal;
-friends.innerHTML = addFriendNames(names);
-totalStepGoal.innerText = allStepGoals;
-
-
-// Activity related DOM
-let activity = new Activity(activityData);
+const populateUserInfoDOM = () => {
+  firstName.innerHTML = `Welcome back, ${currentUser.returnUsersFirstName()}!`;
+  userName.innerText = currentUser.name;
+  address.innerText = currentUser.address;
+  email.innerText = currentUser.email;
+  strideLength.innerText = currentUser.strideLength;
+  dailyStepGoal.innerText = currentUser.dailyStepGoal;
+  friends.innerHTML = addFriendNames(names);
+  totalStepGoal.innerText = allStepGoals;
+}
 
 function stepGoalFeedback() {
   let response
@@ -116,7 +94,6 @@ function stepGoalFeedback() {
 function findStepChallengeWinner(userID, activityType, dateRange) {
   let userAndFriends = [];
   let htmlToAdd = '';
-  // let currentUserFirstName = 'You;
   let currentUserStepCount = activity.getActivityByWeek(userID, activityType, dateRange);
 
   userAndFriends.push({name: 'Your step count', stepTotal: currentUserStepCount});
@@ -131,42 +108,32 @@ function findStepChallengeWinner(userID, activityType, dateRange) {
     htmlToAdd += `<li>${user.name}: ${user.stepTotal}</li>`;
   });
   stepChallenge.insertAdjacentHTML('beforeend', htmlToAdd);
-    // insertAdjacentHTML htmlToAdd to DOM.
 };
 
-findStepChallengeWinner(randNum, 'numSteps', [lastDate, todaysDate])
+const populateActivityInfoDOM = () => {
+  activity.getDistanceRecord(randNum);
+  userStepAmount.innerText = activity.getUserStepAmount(randNum, todaysDate);
+  userMileage.innerText = activity.getDistanceByDate(randNum, todaysDate);
+  activityTotalDay.innerText = activity.getActivityDurationByDate(randNum, todaysDate);
+  activityTotalWeek.innerText = activity.getActivityByWeek(randNum, 'minutesActive', [lastDate, todaysDate]);
+  stairsTotalWeek.innerText = activity.getActivityByWeek(randNum, 'flightsOfStairs', [lastDate, todaysDate]);
+  stepsTotalWeek.innerText = activity.getActivityByWeek(randNum, 'numSteps', [lastDate, todaysDate]);
+  stepGoalStatusDay.innerText = stepGoalFeedback();
+  stairClimbingRecord.innerText = activity.getStairClimbingRecord(randNum);
+  stairClimbingAverage.innerText = activity.getAvgActivity('flightsOfStairs', todaysDate);
+  stepAverage.innerText = activity.getAvgActivity('numSteps', todaysDate);
+  minutesAverage.innerText = activity.getAvgActivity('minutesActive', todaysDate);
+  mileageRecord.innerText = activity.getDistanceRecord(randNum);
+}
 
-let stepGoalStats = activity.getAllExceededStepGoalDates(randNum);
-
-
-
-activity.getDistanceRecord(randNum);
-
-userStepAmount.innerText = activity.getUserStepAmount(randNum, todaysDate);
-userMileage.innerText = activity.getDistanceByDate(randNum, todaysDate);
-activityTotalDay.innerText = activity.getActivityDurationByDate(randNum, todaysDate);
-activityTotalWeek.innerText = activity.getActivityByWeek(randNum, 'minutesActive', [lastDate, todaysDate]);
-stairsTotalWeek.innerText = activity.getActivityByWeek(randNum, 'flightsOfStairs', [lastDate, todaysDate]);
-stepsTotalWeek.innerText = activity.getActivityByWeek(randNum, 'numSteps', [lastDate, todaysDate]);
-stepGoalStatusDay.innerText = stepGoalFeedback();
-// stepGoalStatus.innerText = activity.getAllExceededStepGoalDates(randNum);
-stairClimbingRecord.innerText = activity.getStairClimbingRecord(randNum);
-stairClimbingAverage.innerText = activity.getAvgActivity('flightsOfStairs', todaysDate);
-stepAverage.innerText = activity.getAvgActivity('numSteps', todaysDate);
-minutesAverage.innerText = activity.getAvgActivity('minutesActive', todaysDate);
-mileageRecord.innerText = activity.getDistanceRecord(randNum);
-
-// Populate Hours of sleep
 const populateHoursOfSleep = () => {
   hoursOfSleep.innerHTML = sleepDataset.getSleepAmountByDate(randNum, todaysDate);
 }
 
-// Populate Quantity of sleep
 const populateQualityOfSleep = () => {
   qualityOfSleep.innerHTML = sleepDataset.getSleepQualityByDate(randNum, todaysDate);
 }
 
-// Populate weekly sleep info
 const populateWeeklySleepInfo = (randNum, dateRange) => {
   let weeklySleep = sleepDataset.getSleepInfoByWeek(randNum, [lastDate, todaysDate]);
   let fullWeek = '';
@@ -196,17 +163,6 @@ const populateQualityOfSleepRecord = () => {
   qualityOfSleepRecord.innerHTML = sleepDataset.findSleepQualityRecord(randNum);
 }
 
-// const populateSleepInfoDOM = (randNum, todaysDate, lastDate) => {
-//
-// }
-populateHoursOfSleep();
-populateQualityOfSleep();
-populateWeeklySleepInfo(randNum, [todaysDate, lastDate]);
-populateAllTimeAvgSleepQuality();
-populateAllTimeAvgSleepHours();
-populateQualityOfSleepRecord();
-
-
 function findStreaks(randNum) {
   let activities =  activity.data.filter(function(activityObj) {
       return activityObj.userID === randNum;
@@ -233,14 +189,23 @@ function findStreaks(randNum) {
   populateDOMStreakChallenge(incrementingDays);
 }
 
-findStreaks(randNum);
-
 function populateDOMStreakChallenge(incrementingDays) {
   let allStreaks = '';
-
   incrementingDays.forEach(function(arr) {
-
     allStreaks += `<li>${arr.join(', ')}</li>`
   });
   streakChallenge.insertAdjacentHTML('beforeend', allStreaks);
 }
+
+populateWeeklyWaterConsumption();
+populateWaterConsumption();
+populateUserInfoDOM();
+findStepChallengeWinner(randNum, 'numSteps', [lastDate, todaysDate])
+populateActivityInfoDOM();
+populateHoursOfSleep();
+populateQualityOfSleep();
+populateWeeklySleepInfo(randNum, [todaysDate, lastDate]);
+populateAllTimeAvgSleepQuality();
+populateAllTimeAvgSleepHours();
+populateQualityOfSleepRecord();
+findStreaks(randNum);
