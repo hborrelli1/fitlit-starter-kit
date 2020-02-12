@@ -138,22 +138,16 @@ const populateHoursOfSleep = () => {
   hoursOfSleep.innerHTML = sleepDataset.getSleepAmountByDate(randNum, todaysDate);
 }
 
-populateHoursOfSleep();
-
 // Populate Quantity of sleep
 const populateQualityOfSleep = () => {
   qualityOfSleep.innerHTML = sleepDataset.getSleepQualityByDate(randNum, todaysDate);
 }
 
-populateQualityOfSleep();
-
-
 // Populate weekly sleep info
 const populateWeeklySleepInfo = (randNum, dateRange) => {
   let weeklySleep = sleepDataset.getSleepInfoByWeek(randNum, [lastDate, todaysDate]);
   let fullWeek = '';
-
-  let totalForWeek = weeklySleep.reduce((acc, day) => {
+  weeklySleep.reduce((acc, day) => {
     let date = day.date.substring(5);
     fullWeek += `<div>
       <span class="day-of-week">${date}</span>
@@ -167,22 +161,24 @@ const populateWeeklySleepInfo = (randNum, dateRange) => {
   weeklySleepList.insertAdjacentHTML('beforeend', fullWeek);
 }
 
-populateWeeklySleepInfo(randNum, [todaysDate, lastDate]);
-
 const populateAllTimeAvgSleepQuality = () => {
   allTimeSleepQuality.innerHTML = sleepDataset.getAvgTotalSleepQuality(randNum);
 }
-
-populateAllTimeAvgSleepQuality();
 
 const populateAllTimeAvgSleepHours = () => {
   allTimeSleepHours.innerHTML = sleepDataset.getAvgDailySleep(randNum);
 }
 
-populateAllTimeAvgSleepHours();
-
 const populateQualityOfSleepRecord = () => {
   qualityOfSleepRecord.innerHTML = sleepDataset.findSleepQualityRecord(randNum);
 }
 
+// const populateSleepInfoDOM = (randNum, todaysDate, lastDate) => {
+//
+// }
+populateHoursOfSleep();
+populateQualityOfSleep();
+populateWeeklySleepInfo(randNum, [todaysDate, lastDate]);
+populateAllTimeAvgSleepQuality();
+populateAllTimeAvgSleepHours();
 populateQualityOfSleepRecord();
