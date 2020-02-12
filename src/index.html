@@ -15,30 +15,32 @@
       <section class="user-profile">
         <h2 id="firstName">Welcome back,</h2>
         <div class = "info">
-          <p>Name:</p>
+          <p class="title">Name:</p>
           <p id="userName" class="">Harry Borrelli</h2>
         </div>
         <div class="info">
-          <p>Address:</p>
+          <p class="title">Address:</p>
           <p id="address">15195 Nakia Tunnel, Erdmanport VA 19901-1697</p>
         </div>
         <div class="info">
-          <p>Email:</p>
+          <p class="title">Email:</p>
           <p id="email">Diana.Hayes1@hotmail.com</p>
         </div>
-        <div class="info"
-          <p>Stride Length:</p>
+        <div class="info">
+          <p class="title">Stride Length:</p>
           <p id="strideLength">4.3</p>
         </div>
         <div class="info">
-          <p>Friends:</p>
+          <p class="title">Friends:</p>
           <ul id="friends">
           </ul>
         </div>
         <div class="info goals">
-          <p>Your Daily Step Goal is:</p>
+          <p class="title">Your Daily Step Goal is:</p>
           <p id="dailyStepGoal">10000</p>
-          <p>The Average Daily Step Goal of All Users is:</p>
+        </div>
+        <div class="info goals">
+          <p class="title">The Average Daily Step Goal of All Users is:</p>
           <p id="totalStepGoal">hold</p>
         </div>
       </section>
@@ -47,7 +49,7 @@
           <h3>Hydration</h3>
           <p class="total-consumed-today"><span id="waterComsumptionToday"></span>oz</p>
           <p>Drank Today!</p>
-          <p class="">Weekly consumption of water:</p>
+          <p class="weekly-consumption">Weekly consumption of water:</p>
           <section id="weeklyConsumptionList" class="weekly-list">
           </section>
         </section>
@@ -66,26 +68,37 @@
         </section>
         <section class="widget activity-widget">
           <h3>Activity</h3>
-          <p class="user-step-amount">Your step total for the day: <span id="user-step-amount">empty</span> steps.</p>
-          <p class="user-mileage">Your total mileage for the day: <span id="user-mileage">empty</span> miles.</p>
-          <p class="activity-total-day">Your total minutes of activity for the day: <span id ="activity-total-day">empty</span> minutes.</p>
-          <p class="activity-total-week">Your total minutes of activity for the week: <span id ="activity-total-week">empty</span> minutes.</p>
-          <p class="steps-total-week">Your total steps for the week: <span id ="steps-total-week">empty</span> steps.</p>
-          <p class="stairs-total-week">Your total flights of stairs for the week: <span id ="stairs-total-week">empty</span> flights.</p>
-
-          <p class="step-goal-status">Today you <span id ="step-goal-status-day">empty</span> your step goal </p>
-          <p class="stair-climbing-record">Your stair climbing record to date is: <span id ="stair-climbing-record">empty</span> flights.</p>
-          <p class="stair-climbing-average">The average number of stairs climbed on this date for all users is: <span id ="stair-climbing-average">empty</span> flights.</p>
-          <p class="step-average">The average number of steps on this date for all users is: <span id ="step-average">empty</span> steps.</p>
-          <p class="minutes-average">The average minutes of activity on this date for all users is: <span id ="minutes-average">empty</span> minutes.</p>
-          <p class="mileage-record">Your longest distance record is: <span id ="mileage-record">empty</span> miles. Good job!</p>
+          <div class="info">
+            <p class="title">Step Goal Status:</p>
+            <p class="step-goal-status">Today you <span id ="step-goal-status-day">empty</span> your step goal </p>
+          </div>
+          <div class="info">
+            <p class="title">Step Info:</p>
+            <p class="user-step-amount">Your step total for the day: <span id="user-step-amount">empty</span> steps.</p>
+            <p class="step-average">The average number of steps on this date for all users is: <span id ="step-average">empty</span> steps.</p>
+            <p class="steps-total-week">Your total steps for the week: <span id ="steps-total-week">empty</span> steps.</p>
+            <p class="user-mileage">Your total mileage for the day: <span id="user-mileage">empty</span> miles.</p>
+            <p class="mileage-record">Your longest distance record is: <span id ="mileage-record">empty</span> miles. Good job!</p>
+          </div>
+          <div class="info">
+            <p class="title">Activity Time Info:</p>
+            <p class="activity-total-day">Your total minutes of activity for the day: <span id ="activity-total-day">empty</span> minutes.</p>
+            <p class="minutes-average">The average minutes of activity on this date for all users is: <span id ="minutes-average">empty</span> minutes.</p>
+            <p class="activity-total-week">Your total minutes of activity for the week: <span id ="activity-total-week">empty</span> minutes.</p>
+          </div>
+          <div class="info">
+            <p class="title">Stair Info:</p>
+            <p class="stairs-total-week">Your total flights of stairs for the week: <span id ="stairs-total-week">empty</span> flights.</p>
+            <p class="stair-climbing-average">The average number of stairs climbed on this date for all users is: <span id ="stair-climbing-average">empty</span> flights.</p>
+            <p class="stair-climbing-record">Your stair climbing record to date is: <span id ="stair-climbing-record">empty</span> flights.</p>
+          </div>
         </section>
         <section class="widget challenge-widget">
           <h3>Step Challenge</h3>
-          <p class="">This week, you and your friends had the following steps:</p>
+          <p class="title">This week, you and your friends had the following steps:</p>
           <ol id="step-challenge"></ol>
           <h3>Streak Challenge</h3>
-          <p class="">These are your 3 day streaks for increasing step counts</p>
+          <p class="title">These are your 3 day streaks for increasing step counts:</p>
           <ol id="streak-challenge"></ol>
         </section>
       </section>

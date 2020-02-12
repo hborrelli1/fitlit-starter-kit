@@ -24,6 +24,11 @@ main {
   height:calc(100vh - 77px);
 }
 
+ul,
+ol {
+  padding-left:20px;
+}
+
 .user-profile {
   width:25%;
   padding:2em;
@@ -36,6 +41,14 @@ main {
 
 .goals {
   margin-top: 10%;
+}
+
+.title {
+  font-weight:600;
+}
+
+.info {
+  margin:3% 0px;
 }
 
 .widget-container {
@@ -52,18 +65,9 @@ main {
   width:calc(50% - 2em);
 }
 
-/* .widget-container .hydration-widget,
-.widget-container .sleep-widget {
-  width:calc(50% - 2em);
-} */
-
 .widget-container .widget span {
   font-weight:bold;
 }
-
-/* .widget-container .activity-widget {
-  width:100%;
-} */
 
 .widget-container .weekly-list {
   display:flex;
@@ -76,4 +80,24 @@ main {
 
 .widget-container .weekly-list div * {
   display:block;
+}
+
+.total-consumed-today {
+  font-size:40px;
+}
+
+.weekly-consumption {
+  margin-top:20px;
+}
+
+.sleep-quality-record{
+  margin-bottom:20px;
+}
+
+.weekly-list {
+  margin-bottom:20px;
+}
+
+#step-challenge {
+  margin-bottom:20px;
 }
