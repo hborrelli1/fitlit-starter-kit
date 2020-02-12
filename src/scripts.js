@@ -15,7 +15,6 @@ const activityTotalWeek = document.getElementById('activity-total-week');
 const stepsTotalWeek = document.getElementById('steps-total-week');
 const stairsTotalWeek = document.getElementById('stairs-total-week');
 const stepGoalStatusDay = document.getElementById('step-goal-status-day');
-// const stepGoalStatusAll = document.getElementById('step-goal-status-week');
 const stairClimbingRecord = document.getElementById('stair-climbing-record');
 const stairClimbingAverage = document.getElementById('stair-climbing-average');
 const stepAverage = document.getElementById('step-average');
@@ -29,6 +28,7 @@ const allTimeSleepHours = document.getElementById('allTimeSleepHours');
 const qualityOfSleepRecord = document.getElementById('qualityOfSleepRecord');
 const stepChallenge = document.getElementById('step-challenge');
 const streakChallenge = document.getElementById('streak-challenge');
+const stairMasters = document.getElementById('stairMasters');
 
 const userRepo = new UserRepository(userData);
 const allStepGoals = userRepo.calculateAvgTotalStepGoal();
@@ -41,7 +41,6 @@ let activity = new Activity(activityData);
 let todaysDate = '2019/09/22';
 let lastDate = '2019/09/16';
 let userWaterConsumption = hydrationDataset.getTotalConsumedByDate(randNum, todaysDate);
-// let stepGoalStats = activity.getAllExceededStepGoalDates(randNum);
 
 function addFriendNames() {
   let friends = names.map(function(name) {
@@ -112,9 +111,8 @@ function findStepChallengeWinner(userID, activityType, dateRange) {
 
 const findStairMaster = (userID) => {
   let userStairRecord = activity.getStairClimbingRecord(userID);
-
   let usersFriends = currentUser.friends;
-
+  
   let friendsStairRecords = usersFriends.reduce((acc, friendID) => {
     let friendRecord = {};
     let record = activity.getStairClimbingRecord(friendID);
@@ -130,9 +128,13 @@ const findStairMaster = (userID) => {
     return acc;
   }, []);
 
+  let allStairMasters = '';
+  friendsRecords.sort((a,b) => b.record - a.record);
+  friendsRecords.forEach(record => {
+    allStairMasters += `<li>${record.id}: ${record.record}</li>`;
+  });
+  stairMasters.insertAdjacentHTML('beforeend', allStairMasters);
 }
-
-findStairMaster(randNum);
 
 const populateActivityInfoDOM = () => {
   activity.getDistanceRecord(randNum);
@@ -221,6 +223,7 @@ function populateDOMStreakChallenge(incrementingDays) {
   streakChallenge.insertAdjacentHTML('beforeend', allStreaks);
 }
 
+findStairMaster(randNum);
 populateWeeklyWaterConsumption();
 populateWaterConsumption();
 populateUserInfoDOM();
