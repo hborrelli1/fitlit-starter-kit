@@ -15,7 +15,7 @@ const activityTotalWeek = document.getElementById('activity-total-week');
 const stepsTotalWeek = document.getElementById('steps-total-week');
 const stairsTotalWeek = document.getElementById('stairs-total-week');
 const stepGoalStatusDay = document.getElementById('step-goal-status-day');
-const stepGoalStatusAll = document.getElementById('step-goal-status-week');
+// const stepGoalStatusAll = document.getElementById('step-goal-status-week');
 const stairClimbingRecord = document.getElementById('stair-climbing-record');
 const stairClimbingAverage = document.getElementById('stair-climbing-average');
 const stepAverage = document.getElementById('step-average');
@@ -41,10 +41,10 @@ let activity = new Activity(activityData);
 let todaysDate = '2019/09/22';
 let lastDate = '2019/09/16';
 let userWaterConsumption = hydrationDataset.getTotalConsumedByDate(randNum, todaysDate);
-let stepGoalStats = activity.getAllExceededStepGoalDates(randNum);
+// let stepGoalStats = activity.getAllExceededStepGoalDates(randNum);
 
-function addFriendNames(){
-  let friends = names.map(function(name){
+function addFriendNames() {
+  let friends = names.map(function(name) {
     return `<li>${name}</li>`
   })
   return friends.join(' ');
@@ -54,7 +54,7 @@ const populateWeeklyWaterConsumption = () => {
   let weeklyConsumption = hydrationDataset.getWeeklyConsumption(randNum, [todaysDate, lastDate]);
   let fullWeek = '';
 
-  let totalForWeek = weeklyConsumption.reduce((acc, day) => {
+  weeklyConsumption.reduce((acc, day) => {
     let date = day.date.substring(5);
     fullWeek += `<div>
       <span class="day-of-week">${date}</span>
@@ -83,13 +83,13 @@ const populateUserInfoDOM = () => {
 function stepGoalFeedback() {
   let response
   let result = activity.checkUserStepGoalByDate(randNum, todaysDate);
-  if(result === true) {
+  if (result === true) {
     response = 'met';
   } else {
     response = 'did not meet';
   }
   return response;
-};
+}
 
 function findStepChallengeWinner(userID, activityType, dateRange) {
   let userAndFriends = [];
@@ -108,7 +108,7 @@ function findStepChallengeWinner(userID, activityType, dateRange) {
     htmlToAdd += `<li>${user.name}: ${user.stepTotal}</li>`;
   });
   stepChallenge.insertAdjacentHTML('beforeend', htmlToAdd);
-};
+}
 
 const populateActivityInfoDOM = () => {
   activity.getDistanceRecord(randNum);
@@ -172,8 +172,8 @@ function findStreaks(randNum) {
   for (var i = 0; i < activities.length - 2; i++) {
     let streak = [];
     streak.push(activities[i].date.substring(5));
-    for( var j = i+1; j < activities.length; j++){
-      if(activities[j].numSteps > activities[j-1].numSteps) {
+    for (var j = i + 1; j < activities.length; j++) {
+      if (activities[j].numSteps > activities[j - 1].numSteps) {
         streak.push(activities[j].date.substring(5));
       } else {
         if (streak.length >= 3) {
