@@ -6,7 +6,7 @@ describe('UserRepository', function() {
   let user1Info
   let user2Info
 
-  beforeEach(function(){
+  beforeEach(function() {
     user1Info = {
       "id": 1,
       "name": "Luisa Hane",
