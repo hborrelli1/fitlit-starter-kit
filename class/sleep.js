@@ -5,12 +5,10 @@ class Sleep {
 
   getAvgDailySleep(userID) {
     let userInfo = this.data.filter(user => user.userID === userID);
-
     let totalHoursSlept = userInfo.reduce((total, sleepEntry) => {
       total += sleepEntry.hoursSlept;
       return total;
     }, 0);
-
     let avg = totalHoursSlept / userInfo.length;
 
     return Number(avg.toFixed(1));
@@ -18,13 +16,10 @@ class Sleep {
 
   getAvgTotalSleepQuality(userID) {
     let userInfo = this.data.filter(user => user.userID === userID);
-
     let avgHoursSlept = userInfo.reduce((total, sleepEntry) => {
       total += sleepEntry.sleepQuality;
-
       return total;
     }, 0);
-
     let avg = avgHoursSlept / userInfo.length;
 
     return Number(avg.toFixed(1));
@@ -34,6 +29,7 @@ class Sleep {
     let entry = this.data.find(user => {
       return user.userID === userID && user.date === date;
     });
+
     return entry.hoursSlept;
   }
 
@@ -52,7 +48,6 @@ class Sleep {
 
     return entries.reduce((acc, date) => {
       acc.push({ date: date.date, hoursSlept: date.hoursSlept, sleepQuality: date.sleepQuality });
-
       return acc;
     }, []);
   }
@@ -60,10 +55,9 @@ class Sleep {
   getAllUsersAvgSleepQuality() {
     let total = this.data.reduce((total, entry) => {
       return total += entry.sleepQuality;
-
-      return acc;
     },0);
     let avg = total / this.data.length;
+
     return Number(avg.toFixed(1));
   }
 

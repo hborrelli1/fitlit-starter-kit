@@ -20,6 +20,7 @@ header {
 
 main {
   display: flex;
+  flex-flow:wrap;
   height:calc(100vh - 77px);
 }
 
