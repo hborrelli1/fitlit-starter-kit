@@ -11,23 +11,23 @@ class Activity {
     return parseFloat(((strideLength * stepAmount) / mile).toFixed(2));
   }
   getUserStepAmount(userID, date) {
-    return this.data.find(function(user) {
+    return this.data.find((user) => {
       return ((user.userID === userID) && (user.date === date));
     }).numSteps;
   }
   getActivityDurationByDate(userID, date) {
-    return this.data.find(function(user) {
+    return this.data.find((user) => {
       return ((user.userID === userID) && (user.date === date));
     }).minutesActive;
   }
   getActivityByWeek(userID, activityType, dateRange) {
-    let userActivities = this.data.filter(function(activity) {
-      return (activity.userID === userID && (activity.date >= dateRange[0] && activity.date <= dateRange[1]))
+    let userActivities = this.data.filter((activity) => {
+      return (activity.userID === userID && (activity.date >= dateRange[0] && activity.date <= dateRange[1]));
     });
-    let userActivityType = userActivities.map(function(activity) {
+    let userActivityType = userActivities.map((activity) => {
       return activity[activityType];
     });
-    return userActivityType.reduce(function(acc, arr) {
+    return userActivityType.reduce((acc, arr) => {
       return (acc + arr);
     },0);
   }
@@ -40,7 +40,7 @@ class Activity {
   getAllExceededStepGoalDates(userID) {
     const dailyStepGoal = userRepo.getUserInfo(userID).dailyStepGoal;
 
-    let userActivities = this.data.filter(function(activity) {
+    let userActivities = this.data.filter((activity) => {
       return activity.userID === userID;
     });
     let activitiesArray = userActivities.reduce((acc, activity) => {
@@ -53,22 +53,22 @@ class Activity {
     return activitiesArray;
   }
   getStairClimbingRecord(userID) {
-    let userActivities = this.data.filter(function(activity) {
+    let userActivities = this.data.filter((activity) => {
       return activity.userID === userID;
     });
-    let activitiesArray = userActivities.map(function(activity) {
+    let activitiesArray = userActivities.map((activity) => {
       return activity.flightsOfStairs;
     });
     return Math.max(...activitiesArray);
   }
   getAvgActivity(activity, date) {
-    let userActivities = this.data.filter(function(activity) {
+    let userActivities = this.data.filter((activity) => {
       return activity.date === date;
     });
-    let activityAmounts = userActivities.map(function(activityObj) {
+    let activityAmounts = userActivities.map((activityObj) => {
       return activityObj[activity];
     });
-    let total = activityAmounts.reduce(function(acc, arr) {
+    let total = activityAmounts.reduce((acc, arr) => {
       return (acc + arr);
     },0);
     return Number((total/userActivities.length).toFixed());
@@ -79,16 +79,16 @@ class Activity {
      const userActivityDuration = this.getActivityDurationByDate(userID, date);
      const averageActivityDurationAllUsers = this.getAvgActivity(activity, date);
 
-     return `On this day you had ${userActivityDuration} minutes of activity while the average amount of activity for all users was ${averageActivityDurationAllUsers} minutes`
+     return `On this day you had ${userActivityDuration} minutes of activity while the average amount of activity for all users was ${averageActivityDurationAllUsers} minutes`;
   }
   getDistanceRecord(userID) {
     const mile = 5280;
     const strideLength = userRepo.getUserInfo(userID).strideLength;
 
-    let userActivities = this.data.filter(function(activity) {
+    let userActivities = this.data.filter((activity) => {
       return activity.userID === userID;
     });
-    let stepAmount = Math.max(...userActivities.map(function(activity) {
+    let stepAmount = Math.max(...userActivities.map((activity) => {
       return activity.numSteps;
     }));
     return parseFloat(((strideLength * stepAmount) / mile).toFixed(2));
