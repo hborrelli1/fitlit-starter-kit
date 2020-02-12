@@ -3,22 +3,22 @@ class UserRepository {
     this.data = userData;
   }
   getUserInfo(userID) {
-    return this.data.find(function(userInfo) {
+    return this.data.find((userInfo) => {
       return userInfo.id === userID;
-    })
+    });
   }
   calculateAvgTotalStepGoal() {
-    let sumOfAllStepGoals = this.data.reduce(function(acc, userInfo) {
+    let sumOfAllStepGoals = this.data.reduce((acc, userInfo) => {
       return acc + userInfo.dailyStepGoal;
-    }, 0)
+    }, 0);
     return sumOfAllStepGoals / this.data.length;
   }
   getFriends(idArray) {
-    let friendsNames = idArray.map(function(id) {
-      return this.data.find(function(userInfo) {
+    let friendsNames = idArray.map((id) => {
+      return this.data.find((userInfo) => {
         return userInfo.id === id;
       }).name;
-    }.bind(this))
+    });
     return friendsNames;
   };
 }
