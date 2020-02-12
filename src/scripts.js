@@ -30,6 +30,7 @@ const allTimeSleepQuality = document.getElementById('allTimeSleepQuality');
 const allTimeSleepHours = document.getElementById('allTimeSleepHours');
 const qualityOfSleepRecord = document.getElementById('qualityOfSleepRecord');
 const stepChallenge = document.getElementById('step-challenge');
+const streakChallenge = document.getElementById('streak-challenge');
 
 // Initialize Data
 const userRepo = new UserRepository(userData);
@@ -232,9 +233,9 @@ let activities =  activity.data.filter(function(activityObj) {
         counter++;
         let streakDates = [];
 
-        streakDates.push(activities[i].date)
-        streakDates.push(activities[i + 1].date)
-        streakDates.push(activities[i + 2].date)
+        streakDates.push(activities[i].date.substring(5))
+        streakDates.push(activities[i + 1].date.substring(5))
+        streakDates.push(activities[i + 2].date.substring(5))
         incrementingDays.push(streakDates);
         counter = 0;
       } else {
@@ -242,10 +243,20 @@ let activities =  activity.data.filter(function(activityObj) {
       }
     }
   }
-  console.log(incrementingDays);
+  populateDOMStreakChallenge(incrementingDays);
 }
 
 findStreaks(randNum);
+
+function populateDOMStreakChallenge(incrementingDays) {
+  let allStreaks = '';
+
+  incrementingDays.forEach(function(arr) {
+    allStreaks += `<li>${arr.join(', ')}</li>`
+  });
+  streakChallenge.insertAdjacentHTML('beforeend', allStreaks);
+}
+
 
 
   // let counter = 0;
