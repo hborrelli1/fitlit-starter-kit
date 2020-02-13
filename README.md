@@ -7,7 +7,8 @@ FitLit is an activity tracker that displays metrics about users sleep, hydration
 
 ## Screenshots
 
-Add screenshots here.
+![alt text](https://user-images.githubusercontent.com/15935329/74457201-2b09e480-4e45-11ea-8830-90f75e3623e7.png "Logo Title Text 1")
+
 
 ## Installation Instructions
 
